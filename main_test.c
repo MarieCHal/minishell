@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/17 16:36:34 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:30:24 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"minishell.h"
 
-void	treat_pipe_tab(char *cmd_piped)
+void	treat_pipe_tab(char *cmd_piped, char **envp)
 {
 	char **tab1;
 
 	tab1 = ft_split(cmd_piped, ' ');
-	check_tab1(tab1);
+	check_tab1(tab1, envp);
 	free (tab1);	
 }
 
-void	pipe_tab(char *cmd_line)
+void	pipe_tab(char *cmd_line, char **envp)
 {
 	char **result;
 	int	j;
@@ -30,19 +30,21 @@ void	pipe_tab(char *cmd_line)
 	result = ft_split_pipe(cmd_line, '|');
 	while (result[j])
 	{
-		treat_pipe_tab(result[j]);
+		treat_pipe_tab(result[j], envp);
 		j++;
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*cmd;
 	
+	argc = 0;
+	argv = NULL;
 	while (1)
 	{
         cmd = readline("prompt> ");
         add_history(cmd);
-        pipe_tab(cmd);
+        pipe_tab(cmd, envp);
     }
 }

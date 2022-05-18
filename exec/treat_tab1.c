@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   treat_tab1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:16:34 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/18 12:43:15 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:25:28 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // checks if the command is a built_in command of our shell
-int    check_our_built_in(char **tab1)
+int    check_our_built_in(char **tab1, char **envp)
 {
     int     i;
     
@@ -25,6 +25,8 @@ int    check_our_built_in(char **tab1)
             ft_cd(tab1[1]);
         if (i == 4)
             ft_echo(tab1[1]);
+        if (i == 6)
+            ft_get_env(envp);
         if (i == 8)
             ft_exit();
         if (i == 12)
@@ -92,12 +94,12 @@ int check_cmd_shell(char **tab1)
 }
 
 //checks command (first line of tab1)
-int    check_tab1(char **tab1)
+int    check_tab1(char **tab1, char **envp)
 {
     int i;
 
     i = 0;
-    if (!(i = check_our_built_in(tab1)))
+    if (!(i = check_our_built_in(tab1, envp)))
     {
         if (!(check_built_in_shell(tab1)))
         {

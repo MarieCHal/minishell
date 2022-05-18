@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 11:52:59 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/13 13:01:37 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/17 18:49:25 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/17 18:50:31 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../minishell.h"
 
-int main(void)
+void    ft_cd(char *path)
 {
-    char *envp[] = {NULL};
-    char    *argv[] = {"cat", "/Users/mchalard/Desktop/rank 03/minishel/main.c", NULL};
-    
-    execve("/bin/cat", argv, envp);
-    return (0);
+    chdir(path);
 }

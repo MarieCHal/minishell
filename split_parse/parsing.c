@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 13:45:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/18 12:20:49 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/12 14:48:00 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/17 13:08:21 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
+int ft_quotes(const char *str, int i, char q)
 {
-    get_variable_value("salut");
-    return (0);
+    i++;
+    while (str[i] != q && str[i])
+        i++;
+    if (str[i] == '\0')
+    {
+        printf("ok\n");
+        return(0);
+    }
+    return (i);
+}
+
+int ft_count_quotes(const char *str, int i, char q)
+{
+    i++;
+    while (str[i] != q)
+        i++;
+    return(i);
 }

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 13:45:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/18 12:20:49 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/17 18:13:06 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/17 18:14:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
+void    ft_echo(char *str)
 {
-    get_variable_value("salut");
-    return (0);
+    printf("%s\n", str);
 }

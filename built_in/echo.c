@@ -6,13 +6,22 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:13:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 18:14:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:16:26 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_echo(char *str)
+void    ft_echo(char **tab)
 {
-    printf("%s\n", str);
+    int j;
+    
+    j = 1;
+    while (tab[j])
+    {
+        printf("%s", tab[j]);
+        printf(" ");
+        j++;
+    }
+    printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:48:00 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 13:08:21 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:41:30 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int ft_quotes(const char *str, int i, char q)
         i++;
     if (str[i] == '\0')
     {
-        printf("ok\n");
+        printf("eroor quotes\n");
         return(0);
     }
     return (i);

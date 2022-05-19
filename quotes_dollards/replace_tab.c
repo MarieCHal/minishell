@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   replace_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 13:45:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/18 12:20:49 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/19 10:45:20 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/19 11:53:26 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
+char    **parsed_tab(char **tab)
 {
-    get_variable_value("salut");
-    return (0);
+    int j;
+    char    **new_tab;
+    
+    j = 0;
+    while (tab[j])
+        j++;
+    new_tab = malloc(sizeof(char *) * j + 1);
+    j = 0;
+    while (tab[j])
+    {
+        new_tab[j] = malloc(sizeof(char) * ft_strlen(check_quotes(tab[j])));
+        new_tab[j] = check_quotes(tab[j]);
+        j++;
+    }
+    new_tab[j] = 0;
+    return(new_tab);
 }

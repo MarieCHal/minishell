@@ -6,13 +6,29 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 16:21:07 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:47:12 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*char	*ft_strjoin(char *s1, char *s2)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
+
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	i = 0;
+	while (i < n && str1[i] == str2[i] && str1[i] && str2[i])
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char) str1[i] - str2[i]);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i1;
 	int		i2;
@@ -38,4 +54,27 @@
 	}
 	s3[i1] = 0;
 	return (s3);
-}*/
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}
+
+void	free_tab(char **tab_to_free)
+{
+	int	j;
+
+	j = 0;
+	while (tab_to_free[j])
+	{
+		free(tab_to_free[j]);
+		j++;
+	}
+	free(tab_to_free);
+}

@@ -6,27 +6,14 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:40:08 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 15:51:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:28:58 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//--> ? maybe not necessary (libft/utils) ?
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
-
-
 static char	*word_dup(const char *str, int start, int finish)
 {
-	//printf("word dup\n");
 	char	*word;
 	int		i;
 
@@ -40,7 +27,6 @@ static char	*word_dup(const char *str, int start, int finish)
 
 static char	*word_dup_pipe(const char *str, int start, int finish)
 {
-	//printf("word dup pipe\n");
 	char	*word;
 	int		i;
 

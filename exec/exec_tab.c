@@ -6,13 +6,14 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:16:34 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 11:46:05 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/24 13:47:02 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // checks if the command is a built_in command of our shell
+//NO LEAKS IN BUIL_IN FUNCTION !!!!!
 int built_in(char *command)
 {
     DIR *dir;
@@ -30,9 +31,13 @@ int built_in(char *command)
     {
         com = dent->d_name;
         if (ft_strncmp(command, com, ft_strlen(command)) == 0)
+        {
+            closedir(dir);
             return (i);
+        }
         i++;
     }
+    closedir(dir);
     return (0);
 }
 
@@ -61,29 +66,45 @@ int    check_our_built_in(char **tab)
 int check_built_in_shell(char **tab)
 {
     char    *path_exec;
-    char    *envp[] = {"OLDPWD", NULL};
+    char    *envp[] = {"PWD", NULL};
     char    **argv;
+    pid_t   pid;
+    int     wstatus;
+    int     return_val;
     int     j;
     
     j = 0;
+    pid = fork();
+    if (pid < 0)
+        printf("Error pid fork\n");
     while (tab[j])
         j++;
-    argv = malloc(j + 1 * sizeof(char *));
+    argv = malloc(sizeof(char *) * j + 1);
     j = 0;
     while (tab[j])
     {
-        argv[j] = malloc(sizeof(char) *ft_strlen(tab[j]));
-        argv[j] = tab[j];
+        argv[j] = copy_new_line(tab[j]);
         j++;
     }
-    argv[j] = NULL;    
+    argv[j] = 0;
     path_exec = ft_strjoin("/bin/", tab[0]);
-    if ((execve(path_exec, argv, envp) == -1))
+    if (pid == 0)
     {
-        printf("error\n");
-        return (0);
+        if ((execve(path_exec, argv, envp) == -1))
+                exit(1);
     }
-    free_tab(argv);
+    else
+    {
+        waitpid(pid, &wstatus, 0);
+        //printf("child1 finished\n");
+        return_val = WEXITSTATUS(wstatus);
+        free(path_exec);
+        free_tab(argv);
+        //printf("\n");
+        //printf("child return val: %d\n", return_val);
+        if (return_val == 0)
+            return(1);
+    }
     return (0);
 }
 
@@ -91,29 +112,46 @@ int check_built_in_shell(char **tab)
 int check_cmd_shell(char **tab)
 {
     char    *path_exec;
-    char    *envp[] = {getenv("OLDPWD"), NULL};
+    char    *envp[] = {"PWD", NULL};
     char    **argv;
+    pid_t   pid;
+    int     wstatus;
+    int     return_val;
     int     j;
     
     j = 0;
+    pid = fork();
+    if (pid < 0)
+        printf("Error pid fork\n");
     while (tab[j])
         j++;
-    argv = malloc(j + 1 * sizeof(char *));
+    //argv = malloc(j + 1 * sizeof(char *));
+    argv = malloc(sizeof(char *) * j + 1);
     j = 0;
     while (tab[j])
     {
-        argv[j] = malloc(sizeof(char) *ft_strlen(tab[j]));
-        argv[j] = tab[j];
+        argv[j] = copy_new_line(tab[j]);
         j++;
     }
-    argv[j] = NULL;
+    argv[j] = 0;
     path_exec = ft_strjoin("/usr/bin/", tab[0]);
-    if (execve(path_exec, argv, envp) == -1)
+    if (pid == 0)
     {
-        printf("error\n");
-        return (0);
+        if ((execve(path_exec, argv, envp) == -1))
+            exit(1);
     }
-    free_tab(argv);
+    else
+    {
+        waitpid(pid, &wstatus, 0);
+        //printf("child2 finished\n");
+        return_val = WEXITSTATUS(wstatus);
+        free(path_exec);
+        free_tab(argv);
+        //printf("\n");
+        //printf("child return val: %d\n", return_val);
+        if (return_val == 0)
+            return(1);
+    }
     return (0);
 }
 

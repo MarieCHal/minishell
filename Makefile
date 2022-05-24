@@ -6,7 +6,7 @@
 #    By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/05/19 11:33:19 by mchalard         ###   ########.fr        #
+#    Updated: 2022/05/24 10:40:23 by mchalard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ SRC =	main_test.c\
 		built_in/unset.c\
 		utils.c\
 		quotes_dollards/manage_dollard.c\
-		quotes_dollards/parse_quotes.c\
-		quotes_dollards/replace_tab.c
+		quotes_dollards/new_parse_quotes.c\
+		quotes_dollards/replace_tab.c\
+		quotes_dollards/calcul_mem.c\
+		signals/get_pid.c
 
 FLAGS = -Wall -Werror -Wextra
 OBJ = $(SRC:.c=.o)

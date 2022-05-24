@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 10:45:20 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 11:53:26 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:45:12 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char    **parsed_tab(char **tab)
     j = 0;
     while (tab[j])
     {
-        new_tab[j] = malloc(sizeof(char) * ft_strlen(check_quotes(tab[j])));
         new_tab[j] = check_quotes(tab[j]);
         j++;
     }

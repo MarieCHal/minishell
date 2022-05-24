@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:47:50 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 11:27:05 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:24:58 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,28 @@ char    *check_quotes(char *line)
             {
                 if (line[i] == '$')
                 {
-                    k = 0;
-                    tmp = check_dollar(i, line);
-                    if (tmp != NULL)
+                    if (check_dollar_lenght(i, line) > 0)
                     {
-                        while (tmp[k] != '\0')
+                        k = 0;
+                        tmp = check_dollar(i, line);
+                        if (tmp != NULL)
                         {
-                            new_line[j] = tmp[k];
-                            j++;
-                            k++;
+                            while (tmp[k] != '\0')
+                            {
+                                new_line[j] = tmp[k];
+                                j++;
+                                k++;
+                            }
                         }
+                        i += check_dollar_lenght(i, line);
+                        i++;
                     }
-                    i += check_dollar_lenght(i, line);
-                    i++;
+                    else
+                    {
+                        new_line[j] = line[i];
+                        i++;
+                        j++;
+                    }
                 }
                 else if ((line[i] != '$') && (line[i] != '\"') && (line[i] != '\0'))
                 {
@@ -107,7 +116,7 @@ char    *check_quotes(char *line)
         }
         if ((line[i] != '\'') && (line[i] != '\"') && (line[i] != '\0'))
         {
-            if (line[i] == '$')
+            if (line[i] == '$' && check_dollar_lenght(i, line) > 0)
             {
                 k = 0;
                 tmp = check_dollar(i, line);

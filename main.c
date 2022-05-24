@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 18:13:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/24 09:33:41 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/20 17:01:42 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/20 18:46:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void    ft_echo(char **tab)
+int main(void)
 {
-    int j;
+    char *input;
+    char *result;
     
-    j = 1;
-    while (tab[j])
-    {
-        printf("%s", tab[j]);
-        printf(" ");
-        j++;
-    }
-    printf("\n");
+    input = "coucou \"$HOME\"\'salut ca v$HOME\'";
+    result = check_quotes(input);
+    printf("input:  %s\n", input);
+    printf("output: %s\n", result);
+    free(result);
+    while (1)
+        ;
+    return (0);
 }

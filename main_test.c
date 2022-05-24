@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/19 11:54:02 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/24 13:01:47 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void	treat_pipe_tab(char *cmd_piped)
 {
 	char **tab;
+	char **to_parse;
 	
-	tab = parsed_tab(ft_split(cmd_piped, ' '));
+	to_parse = ft_split(cmd_piped, ' ');
+	tab = parsed_tab(to_parse);
 	check_cmd(tab);
-	free_tab(tab);	
+	free_tab(to_parse);
+	free_tab(tab);
 }
 
 void	pipe_tab(char *cmd_line)
@@ -40,10 +43,13 @@ int	main(void)
 {
 	char	*cmd;
 	
+	//signal(SIGINT, sig_int);
 	while (1)
 	{
         cmd = readline("prompt> ");
         add_history(cmd);
         pipe_tab(cmd);
+		free(cmd);
     }
+	return (0);
 }

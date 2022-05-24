@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 11:47:12 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/20 19:03:32 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,37 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	if (i == n)
 		return (0);
 	return ((unsigned char) str1[i] - str2[i]);
+}
+
+char	*ft_strjoin_line(char *s1, char *s2)
+{
+	int		i1;
+	int		i2;
+	char	*s3;
+
+	i1 = 0;
+	i2 = 0;
+	if (!s2)
+		return (NULL);
+	s3 = malloc((ft_strlen(s1) +ft_strlen(s2)) * sizeof(char) + 1);
+	if (!s3)
+		return (NULL);
+	if (s1)
+	{
+		while (s1[i1])
+		{
+			s3[i1] = s1[i1];
+			i1++;
+		}
+	}
+	while (s2[i2])
+	{
+		s3[i1] = s2[i2];
+		i1++;
+		i2++;
+	}
+	s3[i1] = 0;
+	return (s3);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -56,11 +87,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (s3);
 }
 
+//modified to run with parsing!!!
 size_t	ft_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return(0);
 	while (s[i] != 0)
 		i++;
 	return (i);
@@ -77,4 +111,20 @@ void	free_tab(char **tab_to_free)
 		j++;
 	}
 	free(tab_to_free);
+}
+
+char	*copy_new_line(char *new_line)
+{
+	char	*stock;
+	int		i;
+
+	i = 0;
+	stock = malloc(sizeof(char) * ft_strlen(new_line) + 1);
+	while (new_line[i] != '\0')
+	{
+		stock[i] = new_line[i];
+		i++;
+	}
+	stock[i] = '\0';
+	return (stock);
 }

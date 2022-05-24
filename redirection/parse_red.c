@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   parse_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 18:13:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/24 09:33:41 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/19 13:16:37 by mchalard          #+#    #+#             */
+/*   Updated: 2022/05/19 13:19:33 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_echo(char **tab)
+int main(void)
 {
-    int j;
-    
-    j = 1;
-    while (tab[j])
-    {
-        printf("%s", tab[j]);
-        printf(" ");
-        j++;
-    }
-    printf("\n");
+    char    **input;
+
+    return(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:52:59 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 18:35:12 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/05/19 09:34:33 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int built_in(char *command)
     int             i;
     
     i = 0;
-    args = "built_in";
+    args = "/Users/gbeauman/Desktop/marie_minishell/built_in";
     dir = opendir(args);
     if (dir == NULL)
-        printf("error\n");
+        printf("error1\n");
     while ((dent = readdir(dir)) != NULL)
     {
         com = dent->d_name;

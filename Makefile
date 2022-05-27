@@ -6,7 +6,7 @@
 #    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/05/18 13:31:37 by gbeauman         ###   ########.fr        #
+#    Updated: 2022/05/19 10:29:55 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC =	main_test.c\
 		built_in/export.c\
 		built_in/pwd.c\
 		built_in/unset.c\
-		utils.c
+		utils.c\
 
 FLAGS = -Wall -Werror -Wextra
 OBJ = $(SRC:.c=.o)

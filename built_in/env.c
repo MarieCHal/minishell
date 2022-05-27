@@ -6,22 +6,20 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 13:09:04 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/18 14:34:36 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/05/20 16:36:14 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../minishell.h"
 
-void	ft_get_env(char **envp)
+void	ft_get_env(t_tab *tab)
 {
-	char	*env;
-	int		j;
+	int			j;
 
 	j = 0;
-	while (envp[j])
+	while (tab->envp[j])
 	{
-		env = envp[j];
-		printf("%s\n", env);
+		printf("%s\n", tab->envp[j]);
 		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:16:34 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 16:39:13 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:13:58 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int    check_our_built_in(char **tab1, t_tab *tab)
         if (i == 8)
             ft_exit();
         if (i == 12)
-            ft_pwd(tab1[1]);
+            ft_pwd(tab);
     }
     return (1);
 }

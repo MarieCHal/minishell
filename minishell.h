@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 18:59:26 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:54:58 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_tab
 	char	*pwd_var;
 	char	*oldpwd_var;
 	char	**envp;
+	char	*just_path;
 }			t_tab;
 
 
@@ -43,7 +44,7 @@ int     check_tab1(char **tab1, t_tab *tab);
 int     built_in(char *command);
 char    *get_pwd();
 char	*ft_just_pwd();
-char	*ft_pwd();
+void	*ft_pwd(t_tab *tab);
 void    ft_echo(char *str);
 void    ft_exit();
 void    ft_cd(char *path, t_tab *tab);

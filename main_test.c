@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/20 12:24:08 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/05/27 18:04:59 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char **argv, char **envp)
 	
 	tab.envp = envp;
 	tab.dir = NULL;
-	tab.pwd_var = "PWD";
-	tab.oldpwd_var = "OLDPWD";
+	tab.pwd_var = "PWD=";
+	tab.oldpwd_var = "OLDPWD=";
 	argc = 0;
 	argv = NULL;
 	while (1)

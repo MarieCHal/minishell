@@ -6,7 +6,7 @@
 #    By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/05/24 10:40:23 by mchalard         ###   ########.fr        #
+#    Updated: 2022/06/02 18:04:10 by mchalard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRC =	main_test.c\
 		split_parse/ft_split.c\
 		split_parse/parsing.c\
 		exec/exec_tab.c\
+		exec/pipe.c\
+		exec/built_in.c\
 		built_in/cd.c\
 		built_in/echo.c\
 		built_in/env.c\
@@ -28,9 +30,10 @@ SRC =	main_test.c\
 		quotes_dollards/new_parse_quotes.c\
 		quotes_dollards/replace_tab.c\
 		quotes_dollards/calcul_mem.c\
-		signals/get_pid.c
+		signals/signal.c\
+		
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 10:45:20 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/24 10:45:12 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:34:51 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char    **parsed_tab(char **tab)
     j = 0;
     while (tab[j])
         j++;
-    new_tab = malloc(sizeof(char *) * j + 1);
+    new_tab = malloc(sizeof(char *) * (j + 1));
     j = 0;
     while (tab[j])
     {

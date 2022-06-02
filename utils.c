@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/20 19:03:32 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:32:53 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,15 @@ char	*copy_new_line(char *new_line)
 	}
 	stock[i] = '\0';
 	return (stock);
+}
+
+char	*mymalloc(const char *s, size_t len)
+{
+	char	*cpy;
+
+	if (len < ft_strlen(s))
+		cpy = malloc(len * sizeof(char) + 1);
+	else
+		cpy = malloc(ft_strlen(s) * sizeof(char) + 1);
+	return (cpy);
 }

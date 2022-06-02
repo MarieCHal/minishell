@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 17:01:42 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/20 18:46:06 by mchalard         ###   ########.fr       */
+/*   Created: 2022/06/02 15:28:40 by mchalard          #+#    #+#             */
+/*   Updated: 2022/06/02 18:03:31 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
+void	sig_int(int sig)
 {
-    char *input;
-    char *result;
-    
-    input = "coucou \"$HOME\"\'salut ca v$HOME\'";
-    result = check_quotes(input);
-    printf("input:  %s\n", input);
-    printf("output: %s\n", result);
-    free(result);
-    while (1)
-        ;
-    return (0);
+	if (sig == SIGINT)
+	{
+		//printf(" \n");
+		kill(pid_kill, SIGKILL);
+	}
+	//printf("\n");
 }
+
+/*void    sig_segv()
+{
+    exit(0);
+}*/

@@ -6,36 +6,69 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/24 13:01:47 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:54:46 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"minishell.h"
 
-void	treat_pipe_tab(char *cmd_piped)
+//pid_t child_pid = - 1;
+
+//check cat
+int	check_cat(char **result)
 {
-	char **tab;
-	char **to_parse;
+	int	i;
+	int	nb_cat;
+	const char *cat;
+	char **cmd;
 	
-	to_parse = ft_split(cmd_piped, ' ');
-	tab = parsed_tab(to_parse);
-	check_cmd(tab);
-	free_tab(to_parse);
-	free_tab(tab);
+	i = 0;
+	nb_cat = 0;
+	cat = "cat\0";
+	if (result[0] == NULL)
+		return(0);
+	cmd = ft_split(result[0], ' ');
+	if (ft_strncmp(cmd[0], cat, 4) == 0)
+	{
+		i++;
+		nb_cat++;
+		free_tab(cmd);
+		if (result[i] == NULL)
+			return(nb_cat);
+		cmd = ft_split(result[i], ' ');
+		while ((ft_strncmp(cmd[0], cat, 4) == 0))
+		{
+			free_tab(cmd);
+			i++;
+			nb_cat++;
+			if (result[i] == NULL)
+				return(nb_cat);
+			cmd = ft_split(result[i], ' ');
+		}
+	}
+	free_tab(cmd);
+	while (nb_cat != 0)
+	{
+		readline("");
+		nb_cat--;
+	}
+	return (0);
 }
 
 void	pipe_tab(char *cmd_line)
 {
 	char **result;
-	int	j;
-
-	j = 0;
+	//int		j;
+	
+	//j = 0;
 	result = ft_split_pipe(cmd_line, '|');
-	while (result[j])
+	/*while (result[j])
 	{
-		treat_pipe_tab(result[j]);
+		printf("%s\n", result[j]);
 		j++;
-	}
+	}*/
+	check_cmd(result);
+	check_cat(result);
 	free_tab(result);
 }
 

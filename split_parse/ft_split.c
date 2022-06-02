@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:40:08 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/19 11:28:58 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:40:38 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ static int	count_words(const char *str, char c)
     quote = 0;
 	trigger = 0;
     word = 0;
+	//----------
+	/*if (!str)
+		return(0);*/
 	while (str[i])
 	{
         if (str[i] == '\'' || str[i] == '\"')
@@ -147,6 +150,9 @@ char	**ft_split(char const *s, char c)
 	int		index;
 	char	**split;
 
+//---------
+	//if (!s)
+		//return(NULL);
 	split = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);

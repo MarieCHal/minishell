@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   envp_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 10:19:27 by gbeauman         ###   ########.fr       */
+/*   Created: 2022/06/14 10:22:33 by gbeauman          #+#    #+#             */
+/*   Updated: 2022/06/14 17:21:34 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include	"minishell.h"
 
-char	*ft_strdup(const char *s1)
+void	envp_init(t_tab *tab, char **envp)
 {
-	char	*str;
-	int		i;
+	int	i;
+	int	i2;
 
 	i = 0;
-	if (!s1)
-		return (NULL);
-	while (s1[i])
+	i2 = 0;
+	while (envp[i])
 		i++;
-	str = malloc(sizeof(char) * (i + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	i++;
+	tab->envp = malloc (i * sizeof(tab->envp));
+	while (i2 < i - 1)
 	{
-		str[i] = s1[i];
-		i++;
+		tab->envp[i2] = ft_strdup(envp[i2]);
+		i2++;
 	}
-	str[i] = '\0';
-	return (str);
+	tab->envp[i2] = NULL;
 }

@@ -6,7 +6,7 @@
 #    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/05/19 10:29:55 by gbeauman         ###   ########.fr        #
+#    Updated: 2022/06/15 14:29:29 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,9 @@ SRC =	main_test.c\
 		built_in/pwd.c\
 		built_in/unset.c\
 		utils.c\
+		envp_init.c\
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

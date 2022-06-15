@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/27 18:54:58 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:50:35 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_tab
 	char	*oldpwd_var;
 	char	**envp;
 	char	*just_path;
+	char	*home_path;
+	char	*another_oldpwd;
 }			t_tab;
 
 
@@ -51,5 +53,8 @@ void    ft_cd(char *path, t_tab *tab);
 char    *get_variable_value(char *variable);
 void	ft_get_env(t_tab *tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	envp_init(t_tab *tab, char **envp);
+char	*ft_strdup(const char *s1);
+void	ft_export(t_tab *tab, char **var);
 
 #endif

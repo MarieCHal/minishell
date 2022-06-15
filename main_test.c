@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/05/27 18:04:59 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/14 10:37:52 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int	main(int argc, char **argv, char **envp)
 	char	*cmd;
 	t_tab 	tab = {.old_pwd = NULL};
 	
-	tab.envp = envp;
+	//tab.envp = envp;
+	envp_init(&tab, envp);
 	tab.dir = NULL;
 	tab.pwd_var = "PWD=";
 	tab.oldpwd_var = "OLDPWD=";
+	tab.home_path = "/Users/gbeauman";
 	argc = 0;
 	argv = NULL;
 	while (1)

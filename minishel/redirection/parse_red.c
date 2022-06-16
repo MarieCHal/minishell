@@ -6,27 +6,11 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:16:37 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 10:55:57 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:14:35 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int   ft_len_post_red(char **tab)
-{
-    int j;
-    int len;
-
-    j = 0;
-    len = 0;
-    while (tab[j])
-    {
-        if (tab[j][0] != '<' && tab[j][0] != '>')
-            len++; 
-        j++;
-    }
-    return (len - 1);
-}
 
 char **post_red(char **tab)
 {
@@ -36,7 +20,7 @@ char **post_red(char **tab)
 
     j = 0;
     j_new = 0;
-    post_red = malloc(sizeof(char *) * (ft_len_post_red(tab) + 1));
+    post_red = malloc(sizeof(char *) * (ft_len_post_red(tab) + 2));
     while (tab[j])
     {
         if (tab[j][0] == '<' || tab[j][0] == '>')
@@ -53,21 +37,31 @@ char **post_red(char **tab)
     return(post_red);    
 }
 
+//function to copy the redirections (<, <<, >>, >)
+char    *ft_copy_red(char char1, char char2, int i, char *tab)
+{
+    char    *red;
+    
+    if (char1 == char2)
+        red = ft_strncpy(tab, i, i + 2);
+    else 
+       red = ft_strncpy(tab, i, i + 1); 
+    return (red);
+}
+
+
+
 char    **ft_parse_red(char **tab)
 {
     char    **parse_tab;
-    int     nb_red;
-    int     nb_words;
     int     i_tab;
     int     j_tab;
     int     j_new;
     
     j_new = 0;
-    i_tab = 0;
     j_tab = 0;
-    nb_words = count_words_red(tab, '<', '>');
-    nb_red = ft_count_red(tab, '<') + ft_count_red(tab, '>');
-    parse_tab = malloc(sizeof(char *) * (nb_words + nb_red + 1));
+    parse_tab = malloc(sizeof(char *) * ( count_words_red(tab, '<', '>') 
+    + ft_count_red(tab, '<') + ft_count_red(tab, '>') + 1));
     while (tab[j_tab])
     {
         i_tab = 0;
@@ -80,20 +74,9 @@ char    **ft_parse_red(char **tab)
             }
             else
             {
-                if (tab[j_tab][i_tab + 1] == tab[j_tab][i_tab])
-                {
-                    parse_tab[j_new] = malloc(sizeof(char) * 3);
-                    parse_tab[j_new][0] = tab[j_tab][i_tab];
-                    parse_tab[j_new][1] = tab[j_tab][i_tab];
-                    parse_tab[j_new][2] = '\0';
+                if (ft_strlen(parse_tab[j_new] = ft_copy_red(tab[j_tab][i_tab], 
+                tab[j_tab][i_tab + 1], i_tab, tab[j_tab])) == 2)
                     i_tab++;
-                }
-                else
-                {
-                    parse_tab[j_new] = malloc(sizeof(char) * 2);
-                    parse_tab[j_new][0] = tab[j_tab][i_tab];
-                    parse_tab[j_new][1] = '\0';
-                }
                 i_tab++;
             }
             j_new++;

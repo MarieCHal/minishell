@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:43:33 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/08 18:34:14 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:45:34 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ char    *get_file_name(char **cmd_to_parse, int start)
     while (cmd_to_parse[i] != ' ' && cmd_to_parse[i] != '<' && cmd_to_parse[i] != '>' && cmd_to_parse[i] != '\0')
         i++;
     file_name = malloc(sizeof (char) * (i + 1));
-    i = start;
+    /*i = start;
     while (cmd_to_parse[i] != ' ' && cmd_to_parse[i] != '<' && cmd_to_parse[i] != '>' && cmd_to_parse[i] != '\0')
     {
         file_name = 
-    }
+    }*/
 }
 
 //find red input

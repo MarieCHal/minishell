@@ -6,13 +6,14 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 10:45:20 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/02 17:34:51 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:10:10 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char    **parsed_tab(char **tab)
+//returns a tab with all the $replaced and the quotes managed
+char    **replace_quotes(char **tab)
 {
     int j;
     char    **new_tab;

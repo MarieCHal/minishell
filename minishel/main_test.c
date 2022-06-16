@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/09 14:39:54 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:28:49 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,8 @@ int	check_cat(char **result)
 void	pipe_tab(char *cmd_line)
 {
 	char **result;
-	int		j;
 	
-	j = 0;
 	result = ft_split(cmd_line, '|');
-	while (result[j])
-	{
-		printf("%s\n", result[j]);
-		j++;
-	}
 	check_cmd(result);
 	check_cat(result);
 	free_tab(result);

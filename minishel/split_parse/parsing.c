@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:48:00 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/14 13:10:45 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:10:43 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int ft_quotes(const char *str, int i, char q)
         i++;
     if (str[i] == '\0')
     {
-        printf("error quotes\n");
+        printf("error --------- quotes\n");
         return(0);
     }
     return (i);
@@ -106,8 +106,8 @@ int ft_len_red(char *str, int start)
     {
         if (str[i] == '\'' || str[i] == '\"')
         {
-            len += ft_quotes(str, i, str[i]) - 1;
-            i += ft_quotes(str, i, str[i]) - 1;
+            len += ft_quotes(str, i, str[i]);
+            i += ft_quotes(str, i, str[i]);
         }
         if (str[i] == '<' || str[i] == '>')
             return (len);

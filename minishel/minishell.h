@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 11:04:26 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:43:19 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_pid
 
 typedef struct  s_fd
 {
+    int red;
     int fd_in;
     int fd_out;
     int heredocs;
@@ -60,7 +61,7 @@ char    **ft_parse_red(char **tab);
 char	*ft_strncpy_red(char *str, int start, int end);
 char    *get_variable_value(char *variable);
 char    *check_quotes(char *line);
-char    **parsed_tab(char **tab);
+char    **parsed_tab(char *tab, t_fd *files);
 int     check_dollar_lenght(int i, char *line);
 char    *manage_dollar(t_count *count, char *result, char *line);
 char    *check_dollar(int i, char *line);
@@ -68,6 +69,7 @@ int     mem_no_quotes(char *line, int pos);
 int     mem_double_quotes(char *line, int pos);
 int     mem_single_quote(char *line, int pos);
 char    **post_red(char **tab);
+char    **replace_quotes(char **tab);
 
 //utils----------------------------------------------
 size_t	ft_strlen(const char *s);
@@ -79,6 +81,7 @@ void	free_tab(char **tab_to_free);
 int	    count_words(const char *str, char c);
 char	*word_dup(const char *str, int start, int finish);
 char	*copy_new_line(char *new_line);
+char	*ft_strncpy(char *str, int start, int end);
 
 //execution------------------------------------------
 void    check_exec(char *command);
@@ -86,11 +89,12 @@ int     check_cmd(char **tab);
 int     built_in(char *command);
 char    *get_pwd();
 int     check_our_built_in(char **tab);
-int     ft_execve(char *input);
+//int     ft_execve(char *input);
+int     ft_execve(char **input);
 int     ft_pipe(char **cmd, int nb_pipe);
 void	pipe_tab(char *cmd_line);
 
-int ft_new_execve(char **input);
+//int ft_new_execve(char **input);
 
 //built in ------------------------------------------
 void	ft_pwd();
@@ -111,6 +115,10 @@ int     ft_check_fd_in(char **tab, t_fd *files);
 int     check_file_in(char *file_name, t_fd *files);
 void    check_heredoc(char *key_word, t_fd *files);
 int     check_file_out(char *file_name, t_fd *files, int append);
-
+void    close_fd(t_fd *files);
+int     ft_len_post_red(char **tab);
+int    test_red(char **cmd, t_fd *files);
+int error_red(char *cmd, t_fd *files);
+void    ft_init_red(t_fd *files);
 
 #endif

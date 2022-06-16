@@ -6,19 +6,20 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/14 15:52:51 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/16 09:30:44 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strncpy_red(char *str, int start, int end)
+//copies str from start to end 
+char	*ft_strncpy(char *str, int start, int end)
 {
 	int	i;
 	int	j;
 	char *dest;
 
-	dest = malloc(sizeof(char) * (ft_len_red(str, start) + 1));
+	dest = malloc(sizeof(char) * (end - start + 1));
 	j = 0;
 	i = start;
 	while (i < end)
@@ -29,7 +30,6 @@ char	*ft_strncpy_red(char *str, int start, int end)
 	}
 	dest[j] = '\0';
 	return(dest);
-	
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

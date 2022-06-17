@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:02:16 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 14:47:31 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:46:38 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int check_file_in(char *file_name, t_fd *files)
 {
-    if (files->fd_in != 0)
+    if (files->fd_in != -1)
         close(files->fd_in);
     files->fd_in = open(file_name, O_RDONLY);
     if (files->fd_in == -1)
@@ -60,7 +60,6 @@ void    check_heredoc(char *key_word, t_fd *files)
     char    **tmp;
     static int  freed = 1;
     
-    printf("heredocs\n");
     nb_lines = 1;
     if (files->heredocs == 1)
         free_tab(files->tab_in);

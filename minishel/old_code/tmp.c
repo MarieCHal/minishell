@@ -15,7 +15,7 @@ int main(void)
     files.fd_in = 0;
     files.fd_out = 0;
     files.heredocs = 0;*/
-    cmd = "echo salut\0";
+    cmd = "echo salut | grep salut\0";
     split_pipe = ft_split(cmd, '|');
     while (split_pipe[j])
     {
@@ -23,7 +23,6 @@ int main(void)
         j++;
     }
     check_cmd(split_pipe);
-    printf("ok\n");
     /*printf("split_pipe0[0]: %s\n", split_pipe[0]);
     split_space1 = ft_split(split_pipe[0], ' ');
     while (split_space1[j])
@@ -49,7 +48,5 @@ int main(void)
     }
     test_red(post_fd, &files);
     //ft_treat_heredoc(post_fd, &files);*/
-    while (1)
-        ;
     return(0);
 }

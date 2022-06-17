@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:29:22 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/16 13:42:21 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:32:57 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void    close_fd(t_fd *files)
 {
     if (files->heredocs == 1)
         free_tab(files->tab_in);
-    if (files->fd_in != 0)
+    if (files->fd_in != -1)
         close(files->fd_in);
-    if (files->fd_out != 0)
-        close(files->fd_out);  
+    if (files->fd_out != -1)
+        close(files->fd_out); 
 }
 
 //initialize the struct for redirections
@@ -89,8 +89,8 @@ void    close_fd(t_fd *files)
 void    ft_init_red(t_fd *files)
 {
     files->append = 0;
-    files->fd_in = 0;
-    files->fd_out = 0;
+    files->fd_in = -1;
+    files->fd_out = -1;
     files->heredocs = 0;
     files->red = 0;
 }

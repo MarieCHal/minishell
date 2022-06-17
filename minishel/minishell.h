@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/16 14:43:19 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:45:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,9 @@ void    check_heredoc(char *key_word, t_fd *files);
 int     check_file_out(char *file_name, t_fd *files, int append);
 void    close_fd(t_fd *files);
 int     ft_len_post_red(char **tab);
-int    test_red(char **cmd, t_fd *files);
-int error_red(char *cmd, t_fd *files);
+int     exec_red(char **cmd, t_fd *files);
+int     error_red(char *cmd, t_fd *files);
 void    ft_init_red(t_fd *files);
+void    close_pipes(int nb_pipe, int fd[nb_pipe][2]);
 
 #endif

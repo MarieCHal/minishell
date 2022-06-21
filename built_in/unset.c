@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:37:05 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/17 14:54:10 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:38:01 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	ft_var_del(t_tab *tab, int j)
 	free_tab(stock);
 }
 
-int		check_var_comp(char *var)
+int	check_var_comp(char *var)
 {
 	int	i;
-	
+
 	i = 0;
 	while (var[i])
 		i++;
@@ -56,7 +56,7 @@ int		check_var_comp(char *var)
 int	ft_remove_var(t_tab *tab, int j, char *var)
 {
 	int	i;
-	
+
 	i = 0;
 	while (tab->envp[j][i] != '=')
 		i++;
@@ -65,7 +65,7 @@ int	ft_remove_var(t_tab *tab, int j, char *var)
 		ft_var_del(tab, j);
 		return (1);
 	}
-	return (0);	
+	return (0);
 }
 
 int	ft_check_remove(t_tab *tab, char *var)
@@ -73,7 +73,6 @@ int	ft_check_remove(t_tab *tab, char *var)
 	int	j;
 
 	j = 0;
-
 	if (var[0] == '=')
 	{
 		printf ("prompt> export: `%s': not a valid identifier\n", var);
@@ -84,7 +83,7 @@ int	ft_check_remove(t_tab *tab, char *var)
 		while (tab->envp[j])
 		{
 			if (check_var_comp(var))
-				return(0);
+				return (0);
 			else if (ft_remove_var(tab, j, var))
 				return (0);
 			j++;

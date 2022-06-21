@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:13:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 18:14:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:43:20 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include	"../minishell.h"
 
-void    ft_echo(char *str)
+void	ft_echo(char *str)
 {
-    printf("%s\n", str);
+	printf("%s\n", str);
 }

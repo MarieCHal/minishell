@@ -6,7 +6,7 @@
 #    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/06/21 09:25:33 by gbeauman         ###   ########.fr        #
+#    Updated: 2022/06/21 18:28:37 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ SRC =	main_test.c\
 		exec/exec.c\
 		exec/treat_tab1.c\
 		built_in/cd.c\
+		built_in/utils_cd.c\
 		built_in/echo.c\
 		built_in/env.c\
 		built_in/exit.c\
 		built_in/export.c\
+		built_in/utils_export.c\
 		built_in/pwd.c\
 		built_in/unset.c\
 		utils.c\

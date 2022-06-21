@@ -6,14 +6,14 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:31:27 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 15:18:12 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:42:09 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include	"../minishell.h"
 
-void    ft_exit()
+void	ft_exit(void)
 {
-    printf ("exit\n");
-    exit(0);
+	printf ("exit\n");
+	exit(0);
 }

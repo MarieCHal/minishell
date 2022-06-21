@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 10:19:27 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:46:07 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,16 @@ char	*ft_strdup(const char *s1)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	free_tab(char **tab)
+{
+	int	j;
+	
+	j = 0;
+	while (tab[j])
+	{
+		free(tab[j]);
+		j++;
+	}
 }

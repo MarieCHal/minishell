@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:45:53 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/15 15:20:29 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:27:29 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,25 @@ void	free_envp(t_tab *tab)
 	}
 }
 
+int		check_valid_id(char *var, int end)
+{
+	int	i;
+
+	i = 0;
+	while (i < end)
+	{
+		if (var[i] == 95)
+			i++;
+		else if ((var[i] < 65 || var[i] > 90) && (var[i] < 97 || var[i] > 122))
+		{
+			printf ("prompt> export: `%s': not a valid identifier\n", var);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int		check_equal(char *var)
 {
 	int	i;
@@ -74,21 +93,61 @@ int		check_equal(char *var)
 	i = 0;
 	while (var[i])
 	{
-		if (var[i] == '=')
-			return (1);
+		if (var[0] == '=')
+		{
+			printf ("prompt> export: `%s': not a valid identifier\n", var);
+			return (0);
+		}
+		else if (var[i] == '=')
+		{
+			if (check_valid_id(var, i) == 0)
+				return (0);
+			else
+				return (1);
+		}
 		i++;
 	}
 	return (0);
 }
 
-/*void	ft_order(t_tab *tab)
+void	ft_print_order(char **order, int len)
 {
-	char	**order;
 	int	j;
 
 	j = 0;
-	
-}*/
+	while (j < len)
+	{
+		printf ("declare -x %s\n", order[j]);
+		j++;
+	}
+}
+
+void	ft_order(t_tab *tab)
+{
+	char	**order;
+	int		i;
+	int		j;
+	int		j_order;
+	int		len;
+
+	j_order = 0;
+	i = 0;
+	len = 0;
+	while (tab->envp[len])
+		len++;
+	order = malloc (len * sizeof(order));
+	while (i++ <= 122)
+	{
+		j = 0;
+		while (j < len)
+		{
+			if (tab->envp[j][0] == i)
+				order[j_order++] = ft_strdup(tab->envp[j]);
+			j++;
+		}
+	}
+	ft_print_order(order, len);
+}
 
 void	ft_var_new_value(t_tab *tab, char *var, int j)
 {
@@ -135,17 +194,19 @@ void	ft_export(t_tab *tab, char **var)
 	i = 1;
 	envp_stock = NULL;
 	if (var[i] == NULL)
-		printf ("waiting\n");
-		//ft_order(tab);
+		ft_order(tab);
 	while (var[i])
 	{
 		if (!check_equal(var[i]))
 			var[i] = NULL;
 		else if (ft_check_exist_var(tab, var[i]))
 			var[i] = NULL;
-		envp_stock = envp_cpy(tab, envp_stock);
-		new_envp(tab, envp_stock, var[i]);
-		free (envp_stock);
+		else
+		{
+			envp_stock = envp_cpy(tab, envp_stock);
+			new_envp(tab, envp_stock, var[i]);
+			free (envp_stock);
+		}
 		i++;
 	}
 }

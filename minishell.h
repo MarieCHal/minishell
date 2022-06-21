@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/15 13:50:35 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/17 10:47:12 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	envp_init(t_tab *tab, char **envp);
 char	*ft_strdup(const char *s1);
 void	ft_export(t_tab *tab, char **var);
+void	ft_unset(t_tab *tab, char **var);
+char	**envp_cpy(t_tab *tab, char **envp_stock);
+void	free_tab(char **tab);
+int		check_valid_id(char *var, int end);
 
 #endif

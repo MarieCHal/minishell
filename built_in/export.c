@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:45:53 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/23 11:49:43 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:44:21 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_check_exist_var(t_tab *tab, char *var)
 
 	j = 0;
 	len = 0;
-	while (var[len] != '=')
+	while (var[len] != '=' && var[len])
 		len++;
 	while (tab->envp[j])
 	{
@@ -85,7 +85,7 @@ int	ft_check_exist_var(t_tab *tab, char *var)
 		}
 		j++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_export(t_tab *tab, char **var)
@@ -104,8 +104,8 @@ int	ft_export(t_tab *tab, char **var)
 	{
 		if (check_equal(var[i]) == 1)
 			return (1);
-		else if (ft_check_exist_var(tab, var[i]) == 1)
-			return (1);
+		else if (ft_check_exist_var(tab, var[i]) == 0)
+			var[i] = NULL;
 		else
 		{
 			envp_stock = envp_cpy(tab, envp_stock);

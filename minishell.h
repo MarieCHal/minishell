@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/23 10:27:25 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:47:51 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	envp_init(t_tab *tab, char **envp);
 char	*ft_strdup(const char *s1);
 int		ft_export(t_tab *tab, char **var);
-void	ft_unset(t_tab *tab, char **var);
+int		ft_unset(t_tab *tab, char **var);
 char	**envp_cpy(t_tab *tab, char **envp_stock);
 void	free_tab(char **tab);
-int		check_valid_id(char *var, int end);
+int		check_valid_id(char *var, int i);
 int		find_pwd_line(t_tab *tab);
 void	ft_is_oldpwd(t_tab *tab, int j);
 char	*fill_malloc(t_tab *tab, int j, int i, int len);
@@ -68,7 +68,6 @@ void	ft_is_back(t_tab *tab, int j);
 void	free_envp(t_tab *tab);
 char	**envp_cpy(t_tab *tab, char **envp_stock);
 void	new_envp(t_tab *tab, char **envp_stock, char *var);
-int		check_valid_id(char *var, int end);
 int		check_equal(char *var);
 
 #endif

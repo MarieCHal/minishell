@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:28:00 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/23 11:31:41 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:00:40 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,8 @@ int	check_equal(char *var)
 		{
 			if (check_valid_id(var, i) == 0)
 				return (0);
-			else
-				return (1);
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }

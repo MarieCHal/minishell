@@ -22,7 +22,7 @@ int	pwd_pos(t_tab *tab)
 	return (j);
 }
 
-void	*ft_pwd(t_tab *tab)
+int	ft_pwd(t_tab *tab)
 {
 	char	*pwd;
 	int		i;
@@ -33,6 +33,8 @@ void	*ft_pwd(t_tab *tab)
 	j = pwd_pos(tab);
 	len = ft_strlen(tab->envp[j]) - 4;
 	pwd = malloc(len + 1 * sizeof(char));
+	if (!pwd)
+		return (1);
 	while (tab->envp[j][i + 4])
 	{
 		pwd[i] = tab->envp[j][i + 4];

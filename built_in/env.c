@@ -6,13 +6,13 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 13:09:04 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/21 17:42:53 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:54:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../minishell.h"
 
-void	ft_get_env(t_tab *tab)
+int	ft_get_env(t_tab *tab)
 {
 	int			j;
 
@@ -22,4 +22,5 @@ void	ft_get_env(t_tab *tab)
 		printf("%s\n", tab->envp[j]);
 		j++;
 	}
+	return (0);
 }

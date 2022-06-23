@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:08:56 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/21 18:22:11 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:58:33 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_correct_path(t_tab *tab, char *path)
 	}
 }
 
-void	ft_cd(char *path, t_tab *tab)
+int	ft_cd(char *path, t_tab *tab)
 {
 	int		i;
 	int		j;
@@ -83,9 +83,13 @@ void	ft_cd(char *path, t_tab *tab)
 	else if (ft_strncmp(path, "-", 1) == 0)
 		ft_is_minus(tab, j, i + 7);
 	else if (chdir(path) != 0)
+	{
 		printf ("cd: %s: No such file or directory\n", path);
+		return (1);
+	}
 	else if (ft_strncmp(path, "..", 2) == 0)
 		ft_back_cd(tab, path, j, i);
 	else if (chdir(path))
 		ft_correct_path(tab, path);
+	return (0);
 }

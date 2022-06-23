@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/23 13:47:51 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:56:28 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int     check_tab1(char **tab1, t_tab *tab);
 int     built_in(char *command);
 char    *get_pwd();
 char	*ft_just_pwd();
-void	*ft_pwd(t_tab *tab);
+int		ft_pwd(t_tab *tab);
 void    ft_echo(char *str);
 void    ft_exit(void);
-void    ft_cd(char *path, t_tab *tab);
+int	    ft_cd(char *path, t_tab *tab);
 char    *get_variable_value(char *variable);
-void	ft_get_env(t_tab *tab);
+int		ft_get_env(t_tab *tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	envp_init(t_tab *tab, char **envp);
 char	*ft_strdup(const char *s1);

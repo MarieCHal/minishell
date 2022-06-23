@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:45:53 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/21 18:33:53 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:49:43 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ int	ft_check_exist_var(t_tab *tab, char *var)
 		if (ft_strncmp(tab->envp[j], var, len) == 0)
 		{
 			ft_var_new_value(tab, var, j);
-			return (1);
+			return (0);
 		}
 		j++;
 	}
 	return (0);
 }
 
-void	ft_export(t_tab *tab, char **var)
+int	ft_export(t_tab *tab, char **var)
 {
 	char	**envp_stock;
 	int		i;
@@ -96,13 +96,16 @@ void	ft_export(t_tab *tab, char **var)
 	i = 1;
 	envp_stock = NULL;
 	if (var[i] == NULL)
+	{
 		ft_order(tab);
+		return (0);
+	}
 	while (var[i])
 	{
-		if (!check_equal(var[i]))
-			var[i] = NULL;
-		else if (ft_check_exist_var(tab, var[i]))
-			var[i] = NULL;
+		if (check_equal(var[i]) == 1)
+			return (1);
+		else if (ft_check_exist_var(tab, var[i]) == 1)
+			return (1);
 		else
 		{
 			envp_stock = envp_cpy(tab, envp_stock);
@@ -111,4 +114,5 @@ void	ft_export(t_tab *tab, char **var)
 		}
 		i++;
 	}
+	return (0);
 }

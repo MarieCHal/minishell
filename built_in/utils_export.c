@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:28:00 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/21 18:31:35 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:31:41 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int	check_valid_id(char *var, int end)
 		else if ((var[i] < 65 || var[i] > 90) && (var[i] < 97 || var[i] > 122))
 		{
 			printf ("prompt> export: `%s': not a valid identifier\n", var);
-			return (0);
+			return (1);
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	check_equal(char *var)
@@ -94,7 +94,7 @@ int	check_equal(char *var)
 		if (var[0] == '=')
 		{
 			printf ("prompt> export: `%s': not a valid identifier\n", var);
-			return (0);
+			return (1);
 		}
 		else if (var[i] == '=')
 		{
@@ -105,5 +105,5 @@ int	check_equal(char *var)
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }

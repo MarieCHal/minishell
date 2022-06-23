@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:16:34 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/21 18:20:33 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:19:26 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int    check_our_built_in(char **tab1, t_tab *tab)
         return (0);
     else
     {
-        if (i == 2)
+        if (i == 3)
             ft_cd(tab1[1], tab);
-        if (i == 4)
+        if (i == 5)
             ft_echo(tab1[1]);
-        if (i == 6)
+        if (i == 7)
             ft_get_env(tab);
-        if (i == 8)
+        if (i == 9)
             ft_exit();
-        if (i == 10)
+        if (i == 11)
             ft_export(tab, tab1);
-        if (i == 12)
+        if (i == 13)
             ft_pwd(tab);
-		if (i == 14)
+		if (i == 15)
         	ft_unset(tab, tab1);
     }
     return (1);

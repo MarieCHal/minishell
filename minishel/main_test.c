@@ -6,78 +6,65 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/16 14:28:49 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:42:43 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"minishell.h"
 
-//pid_t child_pid = - 1;
+int	exit_status = 0;
 
-//check cat
-int	check_cat(char **result)
-{
-	int	i;
-	int	nb_cat;
-	const char *cat;
-	char **cmd;
-	char *rd;
-	
-	i = 0;
-	nb_cat = 0;
-	cat = "cat\0";
-	if (result[0] == NULL)
-		return(0);
-	cmd = ft_split(result[0], ' ');
-	if (ft_strncmp(cmd[0], cat, 4) == 0)
-	{
-		i++;
-		nb_cat++;
-		free_tab(cmd);
-		if (result[i] == NULL)
-			return(nb_cat);
-		cmd = ft_split(result[i], ' ');
-		while ((ft_strncmp(cmd[0], cat, 4) == 0))
-		{
-			free_tab(cmd);
-			i++;
-			nb_cat++;
-			if (result[i] == NULL)
-				return(nb_cat);
-			cmd = ft_split(result[i], ' ');
-		}
-	}
-	free_tab(cmd);
-	while (nb_cat != 0)
-	{
-		rd = readline("");
-		nb_cat--;
-		free(rd);
-	}
-	return (0);
-}
-
-void	pipe_tab(char *cmd_line)
+void	pipe_tab(char *cmd_line, t_tab *tab)
 {
 	char **result;
 	
+	result = NULL;
+	if (!cmd_line)
+		return;
+	if (!check_error_nb_quotes(cmd_line))
+		return;
 	result = ft_split(cmd_line, '|');
-	check_cmd(result);
+	if (!ft_check_parse_error(result))
+	{
+		free_tab(result);
+		return;
+	}
+	ft_unvalid_cmd(result);
+	if (ft_count_cmd(result, tab) == 1)
+	{
+		free(cmd_line);
+		return;
+	}
+	check_cmd(result, tab);
 	check_cat(result);
 	free_tab(result);
+	free(cmd_line);
 }
 
-int	main(void)
+
+
+int	main(int argc, char **argv, char **envp)
 {
 	char	*cmd;
+	t_tab 	tab = {.old_pwd = NULL};
+	//struct	termios sig;
 	
+	//init_signals(&sig);
 	//signal(SIGINT, sig_int);
+	envp_init(&tab, envp);
+	tab.dir = NULL;
+	tab.pwd_var = "PWD=";
+	tab.oldpwd_var = "OLDPWD=";
+	tab.home_path = "/Users/mchalard";
+	argc = 0;
+	argv = NULL;
 	while (1)
 	{
         cmd = readline("prompt> ");
 		add_history(cmd);
-        pipe_tab(cmd);
-		free(cmd);
+        pipe_tab(cmd, &tab);
+		//free(cmd);
     }
+	//tcsetattr(STDIN_FILENO, TCSANOW, &sig);
 	return (0);
 }

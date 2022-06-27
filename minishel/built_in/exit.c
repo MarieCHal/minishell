@@ -6,13 +6,14 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:31:27 by mchalard          #+#    #+#             */
-/*   Updated: 2022/05/17 18:32:12 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:27:58 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_exit()
+void	ft_exit(void)
 {
-    exit(0);
+	printf ("exit\n");
+	exit(0);
 }

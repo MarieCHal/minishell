@@ -6,11 +6,11 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/16 09:30:44 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:01:57 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //copies str from start to end 
 char	*ft_strncpy(char *str, int start, int end)
@@ -70,11 +70,7 @@ char	*ft_strjoin_line(char *s1, char *s2)
 		}
 	}
 	while (s2[i2])
-	{
-		s3[i1] = s2[i2];
-		i1++;
-		i2++;
-	}
+		s3[i1++] = s2[i2++];
 	s3[i1] = 0;
 	return (s3);
 }
@@ -98,11 +94,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i1++;
 	}
 	while (s2[i2])
-	{
-		s3[i1] = s2[i2];
-		i1++;
-		i2++;
-	}
+		s3[i1++] = s2[i2++];
 	s3[i1] = 0;
 	return (s3);
 }
@@ -120,42 +112,25 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	free_tab(char **tab_to_free)
+char	*ft_strdup(const char *s1)
 {
-	int	j;
-
-	j = 0;
-	while (tab_to_free[j])
-	{
-		free(tab_to_free[j]);
-		j++;
-	}
-	free(tab_to_free);
-}
-
-char	*copy_new_line(char *new_line)
-{
-	char	*stock;
+	char	*str;
 	int		i;
 
 	i = 0;
-	stock = malloc(sizeof(char) * ft_strlen(new_line) + 1);
-	while (new_line[i] != '\0')
+	if (!s1)
+		return (NULL);
+	while (s1[i])
+		i++;
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		stock[i] = new_line[i];
+		str[i] = s1[i];
 		i++;
 	}
-	stock[i] = '\0';
-	return (stock);
-}
-
-char	*mymalloc(const char *s, size_t len)
-{
-	char	*cpy;
-
-	if (len < ft_strlen(s))
-		cpy = malloc(len * sizeof(char) + 1);
-	else
-		cpy = malloc(ft_strlen(s) * sizeof(char) + 1);
-	return (cpy);
+	str[i] = '\0';
+	return (str);
 }

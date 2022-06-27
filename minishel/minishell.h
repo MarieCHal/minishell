@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/17 14:45:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:45:33 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <termios.h>
 
-pid_t   pid_kill;
+extern int exit_status;
 
 //parsing malloc
 typedef struct s_count
@@ -48,9 +49,38 @@ typedef struct  s_fd
     int heredocs;
     int append;
     char    **tab_in;
+    int     error;
 }               t_fd;
 
-int     main(void);
+typedef struct s_red
+{
+    char    **new;
+    int     i;
+    int     j;
+    int     n;
+}               t_red;
+
+typedef struct  s_split
+{
+    size_t	i;
+	size_t	j;
+	int		index;
+	int		check;
+}               t_split;
+
+typedef struct s_tab
+{
+	char	*old_pwd;
+	char	*dir;
+	char	*pwd_var;
+	char	*oldpwd_var;
+	char	**envp;
+	char	*just_path;
+	char	*home_path;
+	char	*another_oldpwd;
+}			t_tab;
+
+int     main(int argc, char **argv, char **envp);
 //parsing ------------------------------------------
 int     ft_quotes(const char *str, int i, char q);
 int     ft_count_quotes(const char *str, int i, char q);
@@ -59,17 +89,19 @@ int	    count_words_red(char **str, char c1, char c2);
 int     ft_len_red(char *str, int start);
 char    **ft_parse_red(char **tab);
 char	*ft_strncpy_red(char *str, int start, int end);
-char    *get_variable_value(char *variable);
-char    *check_quotes(char *line);
+char    *get_variable_value(char *variable, t_tab *tab);
+char    *check_quotes(char *line, t_tab *tab);
 char    **parsed_tab(char *tab, t_fd *files);
 int     check_dollar_lenght(int i, char *line);
-char    *manage_dollar(t_count *count, char *result, char *line);
-char    *check_dollar(int i, char *line);
-int     mem_no_quotes(char *line, int pos);
-int     mem_double_quotes(char *line, int pos);
+char    *manage_dollar(t_count *count, char *result, char *line, t_tab *tab);
+char    *check_dollar(int i, char *line, t_tab *tab);
+int     mem_no_quotes(char *line, int pos, t_tab *tab);
+int     mem_double_quotes(char *line, int pos, t_tab *tab);
 int     mem_single_quote(char *line, int pos);
 char    **post_red(char **tab);
-char    **replace_quotes(char **tab);
+char    **replace_quotes(char **tab, t_tab *tab1);
+int     check_error_nb_quotes(char *cmd);
+int     ft_count_cmd(char **result, t_tab *tab);
 
 //utils----------------------------------------------
 size_t	ft_strlen(const char *s);
@@ -78,37 +110,29 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_line(char *s1, char *s2);
 int	    ft_strncmp(const char *s1, const char *s2, size_t n);
 void	free_tab(char **tab_to_free);
+void	free_double(char *stock, char *tmp);
 int	    count_words(const char *str, char c);
 char	*word_dup(const char *str, int start, int finish);
 char	*copy_new_line(char *new_line);
 char	*ft_strncpy(char *str, int start, int end);
+int	    check_cat(char **result);
+void    ft_unvalid_cmd(char **cmd_pipe);
 
 //execution------------------------------------------
 void    check_exec(char *command);
-int     check_cmd(char **tab);
+int     check_cmd(char **tab_split, t_tab *tab);
 int     built_in(char *command);
-char    *get_pwd();
-int     check_our_built_in(char **tab);
-//int     ft_execve(char *input);
-int     ft_execve(char **input);
-int     ft_pipe(char **cmd, int nb_pipe);
-void	pipe_tab(char *cmd_line);
-
-//int ft_new_execve(char **input);
-
-//built in ------------------------------------------
-void	ft_pwd();
-void    ft_echo(char **tab);
-void    ft_exit();
-void    ft_cd(char *path);
+int     check_our_built_in(char **tab1, t_tab *tab);
+int     ft_execve(char **input, t_tab *tab);
+int     ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab);
 
 //signals-------------------------------------------
 void    sig_int();
 void    wait_signal();
 void    sig_segv();
 int     sig_trigger(char c);
-
-void	execute_read();
+void    init_signals(struct termios *sig);
+char	*ft_itoa(int n);
 
 //redirections-------------------------------------
 int     ft_check_fd_in(char **tab, t_fd *files);
@@ -117,9 +141,35 @@ void    check_heredoc(char *key_word, t_fd *files);
 int     check_file_out(char *file_name, t_fd *files, int append);
 void    close_fd(t_fd *files);
 int     ft_len_post_red(char **tab);
-int     exec_red(char **cmd, t_fd *files);
-int     error_red(char *cmd, t_fd *files);
+int     exec_red(char **cmd, t_fd *files, t_tab *tab);
+int     error_red(char **cmd);
 void    ft_init_red(t_fd *files);
 void    close_pipes(int nb_pipe, int fd[nb_pipe][2]);
+int     ft_search_red(char **cmd);
+int     ft_check_parse_error(char **cmd);
+
+
+//built in ------------------------------------------
+int    ft_echo(char **tab);
+int		ft_pwd(t_tab *tab);
+void    ft_exit(void);
+int	    ft_cd(char *path, t_tab *tab);
+int		ft_get_env(t_tab *tab);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	envp_init(t_tab *tab, char **envp);
+char	*ft_strdup(const char *s1);
+int		ft_export(t_tab *tab, char **var);
+int		ft_unset(t_tab *tab, char **var);
+void	free_tab(char **tab);
+int		check_valid_id(char *var, int i);
+int		find_pwd_line(t_tab *tab);
+void	ft_is_oldpwd(t_tab *tab, int j);
+char	*fill_malloc(t_tab *tab, int j, int i, int len);
+void	ft_back_cd(t_tab *tab, char *path, int j, int i);
+void	ft_is_back(t_tab *tab, int j);
+void	free_envp(t_tab *tab);
+char	**envp_cpy(t_tab *tab, char **envp_stock);
+void	new_envp(t_tab *tab, char **envp_stock, char *var);
+int		check_equal(char *var);
 
 #endif

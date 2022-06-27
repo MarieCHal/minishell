@@ -6,7 +6,7 @@
 #    By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/06/17 14:48:44 by mchalard         ###   ########.fr        #
+#    Updated: 2022/06/27 15:51:46 by mchalard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,27 +19,32 @@ SRC =	main_test.c\
 		exec/built_in.c\
 		exec/pipe.c\
 		exec/exec_red.c\
+		exec/ft_exec_single.c\
 		built_in/cd.c\
+		built_in/utils_cd.c\
 		built_in/echo.c\
 		built_in/env.c\
 		built_in/exit.c\
 		built_in/export.c\
+		built_in/utils_export.c\
 		built_in/pwd.c\
 		built_in/unset.c\
 		quotes_dollards/manage_dollard.c\
 		quotes_dollards/new_parse_quotes.c\
 		quotes_dollards/replace_tab.c\
 		quotes_dollards/calcul_mem.c\
-		signals/signal.c\
-		redirection/check_in.c\
-		redirection/check_out.c\
+		redirection/check_heredocs.c\
 		redirection/parse_red.c\
 		redirection/stdin_out.c\
-		redirection/utils_red.c\
-		utils.c
-		
+		utils/cat.c\
+		utils/utils.c\
+		utils/malloc_free_close.c\
+		utils/utils_red.c\
+		utils/ft_itoa.c\
+		utils/envp_init.c\
+		check_valid_cmd.c\
 
-FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address -fno-omit-frame-pointer
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

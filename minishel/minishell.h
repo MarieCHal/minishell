@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 15:45:33 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:53:02 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,7 @@ void	free_envp(t_tab *tab);
 char	**envp_cpy(t_tab *tab, char **envp_stock);
 void	new_envp(t_tab *tab, char **envp_stock, char *var);
 int		check_equal(char *var);
+int 	free_some_tab(char **var, int i);
+void	fill_new_envp(t_tab *tab, char **envp_strock, char *var);
 
 #endif

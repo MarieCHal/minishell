@@ -3,25 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:28:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 14:39:43 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:05:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../minishell.h"
 
-void	free_envp(t_tab *tab)
+void	fill_new_envp(t_tab *tab, char **envp_stock, char *var)
 {
-	int	i;
-
-	i = 0;
-	while (tab->envp[i])
-	{
-		free (tab->envp[i]);
-		i++;
-	}
+	envp_stock = envp_cpy(tab, envp_stock);
+	new_envp(tab, envp_stock, var);
+	free_tab (envp_stock);
 }
 
 char	**envp_cpy(t_tab *tab, char **envp_stock)
@@ -41,7 +36,6 @@ char	**envp_cpy(t_tab *tab, char **envp_stock)
 		i2++;
 	}
 	envp_stock[i2] = NULL;
-	free_envp (tab);
 	return (envp_stock);
 }
 
@@ -52,10 +46,10 @@ void	new_envp(t_tab *tab, char **envp_stock, char *var)
 
 	i = 0;
 	i2 = 0;
-	printf("varnew: %s\n", var);
 	while (envp_stock[i])
 		i++;
 	i += 2;
+	free_tab (tab->envp);
 	tab->envp = malloc (i * sizeof (tab->envp));
 	while (i2 < i - 2)
 	{
@@ -99,8 +93,8 @@ int	check_equal(char *var)
 		}
 		else if (var[i] == '=')
 		{
-			if (check_valid_id(var, i) == 0)
-				return (0);
+			if (check_valid_id(var, i))
+				return (1);
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/27 14:42:43 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/28 14:52:51 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	tab.dir = NULL;
 	tab.pwd_var = "PWD=";
 	tab.oldpwd_var = "OLDPWD=";
-	tab.home_path = "/Users/mchalard";
+	tab.home_path = "/Users/gbeauman";
 	argc = 0;
 	argv = NULL;
 	while (1)

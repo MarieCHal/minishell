@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:37:05 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/27 15:41:44 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:00:17 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_var_del(t_tab *tab, int j)
 	len = 0;
 	while (stock[len])
 		len++;
+	free_tab (tab->envp);
 	tab->envp = malloc (len * sizeof(tab->envp));
 	while (i < j)
 	{
@@ -75,7 +76,7 @@ int	ft_check_remove(t_tab *tab, char *var)
 	j = 0;
 	if (var[0] == '=')
 	{
-		printf ("prompt> export: `%s': not a valid identifier\n", var);
+		printf ("prompt> unset: `%s': not a valid identifier\n", var);
 		return (1);
 	}
 	else

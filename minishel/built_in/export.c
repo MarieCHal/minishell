@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:28:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 14:42:57 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:04:47 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,28 @@ void	ft_order(t_tab *tab)
 	char	**order;
 	int		i;
 	int		j;
-	int		j_order;
 	int		len;
 
-	j_order = 0;
 	i = 0;
 	len = 0;
 	while (tab->envp[len])
 		len++;
-	order = malloc (len * sizeof(order));
+	len ++;
+	order = malloc (len* sizeof(order));
 	while (i++ <= 122)
 	{
 		j = 0;
-		while (j < len)
+		while (tab->envp[j])
 		{
 			if (tab->envp[j][0] == i)
-				order[j_order++] = ft_strdup(tab->envp[j]);
+				order[j] = ft_strdup(tab->envp[j]);
 			j++;
 		}
 	}
-	ft_print_order(order, len);
+	printf ("%d\n", j);
+	order[j] = NULL;
+	ft_print_order(order, len - 1);
+	free_tab(order);
 }
 
 void	ft_var_new_value(t_tab *tab, char *var, int j)
@@ -58,6 +60,7 @@ void	ft_var_new_value(t_tab *tab, char *var, int j)
 
 	i = 0;
 	len = ft_strlen(var);
+	free(tab->envp[j]);
 	tab->envp[j] = malloc(len + 1 * sizeof(char));
 	while (var[i])
 	{
@@ -65,6 +68,7 @@ void	ft_var_new_value(t_tab *tab, char *var, int j)
 		i++;
 	}
 	tab->envp[j][i] = '\0';
+	free (var);
 }
 
 int	ft_check_exist_var(t_tab *tab, char *var)
@@ -92,6 +96,7 @@ int	ft_export(t_tab *tab, char **var)
 {
 	char	**envp_stock;
 	int		i;
+	//static int	trigger = 0;
 
 	i = 1;
 	envp_stock = NULL;
@@ -107,12 +112,9 @@ int	ft_export(t_tab *tab, char **var)
 		else if (ft_check_exist_var(tab, var[i]) == 0)
 			var[i] = NULL;
 		else
-		{
-			envp_stock = envp_cpy(tab, envp_stock);
-			new_envp(tab, envp_stock, var[i]);
-			free (envp_stock);
-		}
+			fill_new_envp(tab, envp_stock, var[i]);
 		i++;
 	}
+	//free_tab (var);
 	return (0);
 }

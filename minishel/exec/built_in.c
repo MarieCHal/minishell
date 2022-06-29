@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 11:13:57 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 15:47:03 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:21:42 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	built_in(char *command)
 	int				i;
 
 	i = 0;
-	args = "/Users/mchalard/Desktop/rank 03/minishel/built_in";
+	args = "/Users/gbeauman/Desktop/marie_minishell/minishel/built_in";
 	dir = opendir(args);
 	if (dir == NULL)
 		printf("errordir\n");

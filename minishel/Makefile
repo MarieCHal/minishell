@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+         #
+#    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/06/27 15:51:46 by mchalard         ###   ########.fr        #
+#    Updated: 2022/06/29 13:05:38 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC =	main_test.c\
 		utils/envp_init.c\
 		check_valid_cmd.c\
 
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
+FLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

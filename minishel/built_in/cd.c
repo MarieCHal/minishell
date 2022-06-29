@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:49:25 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 13:32:26 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:44:13 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_is_path(t_tab *tab, int j, char *path)
 	char	*slash_path;
 	char	*stock_pwd;
 
+	free (tab->envp[j]);
 	slash_path = ft_strjoin("/", path);
 	stock_pwd = ft_strjoin(tab->pwd_var, tab->just_path);
 	tab->envp[j] = ft_strjoin(stock_pwd, slash_path);
@@ -45,6 +46,7 @@ void	ft_is_pwd(t_tab *tab, char *path, int j)
 
 	i = 4;
 	len = ft_strlen(tab->envp[j]);
+	free (tab->just_path);
 	tab->just_path = fill_malloc(tab, j, i, len - 3);
 	if (ft_strncmp(path, "..", 2) == 0)
 		ft_is_back(tab, j);
@@ -77,6 +79,7 @@ int	ft_cd(char *path, t_tab *tab)
 	if (path == NULL || (ft_strncmp(path, "~", 1) == 0))
 	{
 		ft_is_oldpwd(tab, j + 1);
+		free (tab->envp[j]);
 		tab->envp[j] = ft_strjoin(tab->pwd_var, tab->home_path);
 		chdir (tab->home_path);
 	}
@@ -91,5 +94,6 @@ int	ft_cd(char *path, t_tab *tab)
 		ft_back_cd(tab, path, j, i);
 	else if (chdir(path))
 		ft_correct_path(tab, path);
+	free (tab->just_path);
 	return (0);
 }

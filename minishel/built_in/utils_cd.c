@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 13:32:41 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 13:33:04 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:43:35 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ int	find_pwd_line(t_tab *tab)
 
 void	ft_is_oldpwd(t_tab *tab, int j)
 {
-	char	*old_path;
-
-	old_path = ft_strjoin(tab->oldpwd_var, tab->just_path);
-	tab->envp[j] = old_path;
+	free (tab->envp[j]);
+	tab->envp[j] = ft_strjoin(tab->oldpwd_var, tab->just_path);
 }
 
 char	*fill_malloc(t_tab *tab, int j, int i, int len)
@@ -62,10 +60,13 @@ void	ft_back_cd(t_tab *tab, char *path, int j, int i)
 	while (split_path[i])
 	{
 		ft_is_back(tab, j);
+		free (tab->just_path);
 		find_pwd_line(tab);
 		i++;
 	}
+	free (tab->envp[j + 1]);
 	tab->envp[j + 1] = ft_strjoin(tab->oldpwd_var, back_oldpwd);
+	free_tab (split_path);
 }
 
 void	ft_is_back(t_tab *tab, int j)

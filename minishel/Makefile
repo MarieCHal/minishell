@@ -6,7 +6,7 @@
 #    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/06/29 13:05:38 by gbeauman         ###   ########.fr        #
+#    Updated: 2022/06/29 16:34:03 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC =	main_test.c\
 		exec/ft_exec_single.c\
 		built_in/cd.c\
 		built_in/utils_cd.c\
+		built_in/utils_cd_2.c\
 		built_in/echo.c\
 		built_in/env.c\
 		built_in/exit.c\

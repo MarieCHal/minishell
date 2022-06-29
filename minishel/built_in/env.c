@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:26:17 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/28 10:15:49 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:02:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_get_env(t_tab *tab)
 			if (tab->envp[j][i] == '=')
 			{
 				trigger = 1;
-				break;
+				break ;
 			}
 			i++;
 		}

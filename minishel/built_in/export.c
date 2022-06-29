@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:28:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 13:04:47 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:37:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	ft_export(t_tab *tab, char **var)
 {
 	char	**envp_stock;
 	int		i;
-	//static int	trigger = 0;
 
 	i = 1;
 	envp_stock = NULL;
@@ -115,6 +114,5 @@ int	ft_export(t_tab *tab, char **var)
 			fill_new_envp(tab, envp_stock, var[i]);
 		i++;
 	}
-	//free_tab (var);
 	return (0);
 }

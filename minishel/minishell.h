@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/28 12:53:02 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:38:33 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,7 @@ void	new_envp(t_tab *tab, char **envp_stock, char *var);
 int		check_equal(char *var);
 int 	free_some_tab(char **var, int i);
 void	fill_new_envp(t_tab *tab, char **envp_strock, char *var);
+char	*new_path_malloc(char *path, char *new_path);
+void	cd_home(t_tab *tab, int j);
 
 #endif

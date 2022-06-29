@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:49:25 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/28 15:44:13 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:38:11 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ int	ft_cd(char *path, t_tab *tab)
 {
 	int		i;
 	int		j;
+	char	*new_path;
 
 	i = 0;
 	j = find_pwd_line(tab);
+	new_path = NULL;
+	if (path)
+		if (ft_strncmp(path, "./", 2) == 0)
+			path = new_path_malloc(path, new_path);
 	if (path == NULL || (ft_strncmp(path, "~", 1) == 0))
-	{
-		ft_is_oldpwd(tab, j + 1);
-		free (tab->envp[j]);
-		tab->envp[j] = ft_strjoin(tab->pwd_var, tab->home_path);
-		chdir (tab->home_path);
-	}
+		cd_home(tab, j);
 	else if (ft_strncmp(path, "-", 1) == 0)
 		ft_is_minus(tab, j, i + 7);
 	else if (chdir(path) != 0)

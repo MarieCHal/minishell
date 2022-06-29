@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:37:05 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/28 17:00:17 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:10:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	ft_var_del(t_tab *tab, int j)
 {
 	char	**stock;
-	int		i;
 	int		len;
 
-	i = 0;
 	stock = NULL;
 	stock = envp_cpy(tab, stock);
 	len = 0;
@@ -26,19 +24,20 @@ void	ft_var_del(t_tab *tab, int j)
 		len++;
 	free_tab (tab->envp);
 	tab->envp = malloc (len * sizeof(tab->envp));
-	while (i < j)
+	len = 0;
+	while (len < j)
 	{
-		tab->envp[i] = ft_strdup(stock[i]);
-		i++;
+		tab->envp[len] = ft_strdup(stock[len]);
+		len++;
 	}
 	j++;
 	while (stock[j])
 	{
-		tab->envp[i] = ft_strdup(stock[j]);
-		i++;
+		tab->envp[len] = ft_strdup(stock[j]);
+		len++;
 		j++;
 	}
-	tab->envp[i] = NULL;
+	tab->envp[len] = NULL;
 	free_tab(stock);
 }
 

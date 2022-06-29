@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_in.c                                         :+:      :+:    :+:   */
+/*   check_heredocs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:02:16 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/26 16:20:00 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:33:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,11 @@ void	check_heredoc(char *key_word, t_fd *files)
 	if (files->heredocs == 1)
 		free_tab(files->tab_in);
 	input = ft_input();
-	while ((ft_strncmp(input, key_word, ft_strlen(input)) != 0))
+	while (1)
 	{
+		if ((ft_strncmp(input, key_word, ft_strlen(input)) == 0) 
+			&& (ft_strlen(input) == ft_strlen(key_word)))
+			break;
 		if (freed == 1)
 			freed = ft_freed(files, input);
 		else

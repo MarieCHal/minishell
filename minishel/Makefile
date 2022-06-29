@@ -6,56 +6,80 @@
 #    By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:14:12 by mchalard          #+#    #+#              #
-#    Updated: 2022/06/27 15:51:46 by mchalard         ###   ########.fr        #
+#    Updated: 2022/06/29 16:55:50 by mchalard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = gcc -I $HOME/.brew/Cellar/readline/8.1.2/include
-SRC =	main_test.c\
-		split_parse/ft_split.c\
-		split_parse/parsing.c\
+CC = gcc 
+export CFLAGS = -Wextra -Werror -Wall
+LDFLAGS = -lreadline -L$(HOME)/.brew/Cellar/readline/8.1.2/lib
+
+SRCS_DIR = ./src
+OBJS_DIR = ./objs
+SRCS =	main.c\
+		parsing/parsing.c\
+		parsing/error_red.c\
+		parsing/parse_red.c\
+		parsing/check_valid_cmd.c\
 		exec/exec_tab.c\
 		exec/built_in.c\
 		exec/pipe.c\
 		exec/exec_red.c\
 		exec/ft_exec_single.c\
 		built_in/cd.c\
-		built_in/utils_cd.c\
 		built_in/echo.c\
 		built_in/env.c\
 		built_in/exit.c\
 		built_in/export.c\
-		built_in/utils_export.c\
 		built_in/pwd.c\
 		built_in/unset.c\
-		quotes_dollards/manage_dollard.c\
-		quotes_dollards/new_parse_quotes.c\
-		quotes_dollards/replace_tab.c\
-		quotes_dollards/calcul_mem.c\
+		quotes_dollars/manage_dollar.c\
+		quotes_dollars/new_parse_quotes.c\
+		quotes_dollars/replace_tab.c\
+		quotes_dollars/calcul_mem.c\
 		redirection/check_heredocs.c\
-		redirection/parse_red.c\
 		redirection/stdin_out.c\
-		utils/cat.c\
-		utils/utils.c\
-		utils/malloc_free_close.c\
+		utils/utils_part_one.c\
+		utils/utils_part_two.c\
+		utils/free_close.c\
+		utils/init.c\
 		utils/utils_red.c\
+		utils/utils_cd.c\
+		utils/utils_cd_2.c\
+		utils/utils_export.c\
+		utils/utils_quotes.c\
 		utils/ft_itoa.c\
-		utils/envp_init.c\
-		check_valid_cmd.c\
+		utils/ft_atoi.c\
+		utils/ft_split.c\
+		signals/signal.c
 
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
-OBJ = $(SRC:.c=.o)
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-all: $(NAME)
+vpath %.c $(SRCS_DIR)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(SRC) -lreadline -framework OpenGL -framework AppKit -o $(NAME)
+RM = rm -f
 
-clean:
-	rm -f $(OBJ)
-fclean: clean
-	rm -f $(NAME)
-re: fclean all
+.PHONY: all re clean fclean debug
 
-.PHONY: all clean fclean re
+all : $(NAME)
+
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LDFLAGS)
+
+$(OBJS_DIR):
+	mkdir -p $(dir $(OBJS))
+
+$(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
+	$(CC) $(CFLAGS)  -o $@ -c $^
+
+debug: CFLAGS += -g3 -fsanitize=address -fno-omit-frame-pointer
+debug: $(OBJS) $(NAME)
+
+clean :
+	$(RM) -r $(OBJS_DIR)
+
+fclean : clean
+	$(RM) $(NAME)
+
+re : fclean all

@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:37:05 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/27 15:41:44 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:54:43 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 void	ft_var_del(t_tab *tab, int j)
 {
 	char	**stock;
-	int		i;
 	int		len;
 
-	i = 0;
 	stock = NULL;
 	stock = envp_cpy(tab, stock);
 	len = 0;
 	while (stock[len])
 		len++;
+	free_tab (tab->envp);
 	tab->envp = malloc (len * sizeof(tab->envp));
-	while (i < j)
+	len = 0;
+	while (len < j)
 	{
-		tab->envp[i] = ft_strdup(stock[i]);
-		i++;
+		tab->envp[len] = ft_strdup(stock[len]);
+		len++;
 	}
 	j++;
 	while (stock[j])
 	{
-		tab->envp[i] = ft_strdup(stock[j]);
-		i++;
+		tab->envp[len] = ft_strdup(stock[j]);
+		len++;
 		j++;
 	}
-	tab->envp[i] = NULL;
+	tab->envp[len] = NULL;
 	free_tab(stock);
 }
 
@@ -75,7 +75,7 @@ int	ft_check_remove(t_tab *tab, char *var)
 	j = 0;
 	if (var[0] == '=')
 	{
-		printf ("prompt> export: `%s': not a valid identifier\n", var);
+		printf ("prompt> unset: `%s': not a valid identifier\n", var);
 		return (1);
 	}
 	else

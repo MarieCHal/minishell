@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 15:45:33 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:56:14 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <fcntl.h>
 #include <termios.h>
 
-extern int exit_status;
+extern int g_exit_status;
 
 //parsing malloc
 typedef struct s_count
@@ -38,7 +38,8 @@ typedef struct s_count
 typedef struct s_pid
 {
     pid_t     pid_child1;
-    pid_t     pid_child2;   
+    pid_t     pid_child2;
+    int       fd[2];   
 }               t_pid;
 
 typedef struct  s_fd
@@ -50,6 +51,9 @@ typedef struct  s_fd
     int append;
     char    **tab_in;
     int     error;
+    int     fd[100][2];
+    int     pid[100];
+    int     nb_pipe;
 }               t_fd;
 
 typedef struct s_red
@@ -102,6 +106,8 @@ char    **post_red(char **tab);
 char    **replace_quotes(char **tab, t_tab *tab1);
 int     check_error_nb_quotes(char *cmd);
 int     ft_count_cmd(char **result, t_tab *tab);
+int	    ft_count_pipes(char *cmd_line, char **result);
+char	*stock_quotes(t_count *count);
 
 //utils----------------------------------------------
 size_t	ft_strlen(const char *s);
@@ -116,7 +122,8 @@ char	*word_dup(const char *str, int start, int finish);
 char	*copy_new_line(char *new_line);
 char	*ft_strncpy(char *str, int start, int end);
 int	    check_cat(char **result);
-void    ft_unvalid_cmd(char **cmd_pipe);
+void    ft_unvalid_cmd(char **cmd_pipe, t_tab *tab);
+int	    ft_atoi(char *str);
 
 //execution------------------------------------------
 void    check_exec(char *command);
@@ -125,14 +132,17 @@ int     built_in(char *command);
 int     check_our_built_in(char **tab1, t_tab *tab);
 int     ft_execve(char **input, t_tab *tab);
 int     ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab);
+int	    ft_wait_pid(t_fd *files);
 
 //signals-------------------------------------------
-void    sig_int();
 void    wait_signal();
 void    sig_segv();
 int     sig_trigger(char c);
 void    init_signals(struct termios *sig);
 char	*ft_itoa(int n);
+void	ft_putendl_fd(char *s, int fd);
+void	rl_replace_line (const char *text, int clear_undo);
+int	    ft_check_if_child(int new_val);
 
 //redirections-------------------------------------
 int     ft_check_fd_in(char **tab, t_fd *files);
@@ -144,15 +154,15 @@ int     ft_len_post_red(char **tab);
 int     exec_red(char **cmd, t_fd *files, t_tab *tab);
 int     error_red(char **cmd);
 void    ft_init_red(t_fd *files);
-void    close_pipes(int nb_pipe, int fd[nb_pipe][2]);
+void	close_pipes(int nb_pipe, int (*fd)[2]);
 int     ft_search_red(char **cmd);
 int     ft_check_parse_error(char **cmd);
 
 
 //built in ------------------------------------------
-int    ft_echo(char **tab);
+int     ft_echo(char **tab);
 int		ft_pwd(t_tab *tab);
-void    ft_exit(void);
+int	ft_exit(char **tab);
 int	    ft_cd(char *path, t_tab *tab);
 int		ft_get_env(t_tab *tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -171,5 +181,9 @@ void	free_envp(t_tab *tab);
 char	**envp_cpy(t_tab *tab, char **envp_stock);
 void	new_envp(t_tab *tab, char **envp_stock, char *var);
 int		check_equal(char *var);
+void	ft_init_built_in(t_tab *tab);
+void	fill_new_envp(t_tab *tab, char **envp_stock, char *var);
+char	*new_path_malloc(char *path, char *new_path);
+void	cd_home(t_tab *tab, int j);
 
 #endif

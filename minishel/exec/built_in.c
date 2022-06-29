@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 11:13:57 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 15:47:03 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:01:01 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ int    check_our_built_in(char **tab1, t_tab *tab)
     {
         if (i == 2)
             ft_cd(tab1[1], tab);
-        if (i == 4)
+        if (i == 3)
             ft_echo(tab1);
-        if (i == 6)
+        if (i == 4)
             ft_get_env(tab);
-        if (i == 8)
-            ft_exit();
-        if (i == 10)
+        if (i == 5)
+            ft_exit(tab1);
+        if (i == 6)
             ft_export(tab, tab1);
-        if (i == 12)
+        if (i == 7)
             ft_pwd(tab);
-		if (i == 14)
+		if (i == 8)
         	ft_unset(tab, tab1);
     }
     return (0);

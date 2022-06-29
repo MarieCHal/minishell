@@ -6,13 +6,13 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:32:10 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 13:57:00 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:42:54 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	create_pipe(int nb_pipe, int fd[nb_pipe][2])
+void	create_pipe(int nb_pipe, int (*fd)[2])
 {
 	int	i;
 
@@ -24,30 +24,16 @@ void	create_pipe(int nb_pipe, int fd[nb_pipe][2])
 	}
 }
 
-//closes pipes
-void	close_pipes(int nb_pipe, int fd[nb_pipe][2])
-{
-	int	j;
-
-	j = 0;
-	while (j < nb_pipe)
-	{
-		close(fd[j][0]);
-		close(fd[j][1]);
-		j++;
-	}
-}
-
-int	ft_exec_child(char **cmd, int nb_pipe, int fd[nb_pipe][2], int i, t_fd *files, t_tab *tab)
+int	ft_exec_child(char **cmd, int i, t_fd *files, t_tab *tab)
 {
 	int	j;
 
 	j = 0;
 	if (i > 0)
-		dup2(fd[i - 1][0], STDIN_FILENO);
-	if (i < nb_pipe)
-		dup2(fd[i][1], STDOUT_FILENO); 
-	close_pipes(nb_pipe, fd);
+		dup2(files->fd[i - 1][0], STDIN_FILENO);
+	if (i < files->nb_pipe)
+		dup2(files->fd[i][1], STDOUT_FILENO); 
+	close_pipes(files->nb_pipe, files->fd);
 	if (files->red == 1)
 		exec_red(cmd, files, tab);
 	else if (files->red == 0)
@@ -80,20 +66,18 @@ char	**parsed_tab(char *tab, t_fd *files)
 int ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab)
 {
 	t_fd	files;
-	int		fd[nb_pipe][2];
 	char	**cmd_parsed;
-	int		pid;
-	int		status;
 
-	create_pipe(nb_pipe, fd);
+	create_pipe(nb_pipe, files.fd);
+	files.nb_pipe = nb_pipe;
 	while (i <= nb_pipe)
 	{
 		cmd_parsed = parsed_tab(cmd[i], &files);
-		pid = fork();
-		if (pid == 0)
+		files.pid[i] = fork();
+		if (files.pid[i] == 0)
 		{
-			ft_exec_child(cmd_parsed, nb_pipe, fd, i, &files, tab);
-			close_pipes(nb_pipe, fd);
+			ft_exec_child(cmd_parsed, i, &files, tab);
+			close_pipes(nb_pipe, files.fd);
 			exit(0);
 		}
 		if (files.tab_in)
@@ -101,8 +85,7 @@ int ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab)
 		free_tab(cmd_parsed);
 		i++;
 	}
-	close_pipes(nb_pipe, fd);
-	waitpid(pid, &status, 0);
-	exit_status = WEXITSTATUS(status);
+	close_pipes(nb_pipe, files.fd);
+	ft_wait_pid(&files);
 	return (0);
 }

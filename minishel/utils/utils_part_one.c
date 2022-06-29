@@ -1,0 +1,113 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_part1.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/17 15:56:12 by mchalard          #+#    #+#             */
+/*   Updated: 2022/06/28 16:57:36 by mchalard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+//copies str from start to end 
+char	*ft_strncpy(char *str, int start, int end)
+{
+	int		i;
+	int		j;
+	char	*dest;
+
+	dest = malloc(sizeof(char) * (end - start + 1));
+	j = 0;
+	i = start;
+	while (i < end)
+	{
+		dest[j] = str[i];
+		j++;
+		i++;
+	}
+	dest[j] = '\0';
+	return (dest);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
+
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	i = 0;
+	while (i < n && str1[i] == str2[i] && str1[i] && str2[i])
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char) str1[i] - str2[i]);
+}
+
+char	*ft_strjoin_line(char *s1, char *s2)
+{
+	int		i1;
+	int		i2;
+	char	*s3;
+
+	i1 = 0;
+	i2 = 0;
+	if (!s2)
+		return (NULL);
+	s3 = malloc((ft_strlen(s1) +ft_strlen(s2)) * sizeof(char) + 1);
+	if (!s3)
+		return (NULL);
+	if (s1)
+	{
+		while (s1[i1])
+		{
+			s3[i1] = s1[i1];
+			i1++;
+		}
+	}
+	while (s2[i2])
+		s3[i1++] = s2[i2++];
+	s3[i1] = 0;
+	return (s3);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i1;
+	int		i2;
+	char	*s3;
+
+	i1 = 0;
+	i2 = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = malloc((ft_strlen(s1) +ft_strlen(s2)) * sizeof(char) + 1);
+	if (!s3)
+		return (NULL);
+	while (s1[i1])
+	{
+		s3[i1] = s1[i1];
+		i1++;
+	}
+	while (s2[i2])
+		s3[i1++] = s2[i2++];
+	s3[i1] = 0;
+	return (s3);
+}
+
+//modified to run with parsing!!!
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != 0)
+		i++;
+	return (i);
+}

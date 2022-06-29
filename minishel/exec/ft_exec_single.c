@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 10:56:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 15:09:47 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:37:16 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_exec_single_cmd(char **cmd, char **result, t_fd *files, t_tab *tab)
 		if (check_our_built_in(cmd_args, tab) == 1)
 			check_cmd(result, tab);
 	}
-	free_tab(cmd_args);
+	if (cmd_args)
+		free_tab(cmd_args);
 	return (0);
 }
 

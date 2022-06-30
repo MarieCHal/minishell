@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:16:37 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/27 16:37:59 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:02:00 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_init_struct_red(t_red *red, char **tab)
 	red->n = 0;
 	red->j = 0;
 	red->new = malloc(sizeof(char *) * (count_words_red(tab, '<', '>')
-			+ ft_count_red(tab, '<') + ft_count_red(tab, '>') + 1));
+				+ ft_count_red(tab, '<') + ft_count_red(tab, '>') + 1));
 }
 
 void	ft_set_new(t_red *red, char **tab)
@@ -67,8 +67,9 @@ void	ft_set_new(t_red *red, char **tab)
 	}
 	else
 	{
-		if (ft_strlen(red->new[red->n] = ft_copy_red(tab[red->j][red->i], 
-				tab[red->j][red->i + 1], red->i, tab[red->j])) == 2)
+		red->new[red->n] = ft_copy_red(tab[red->j][red->i],
+				tab[red->j][red->i + 1], red->i, tab[red->j]);
+		if (ft_strlen(red->new[red->n]) == 2)
 			red->i++;
 		red->i++;
 	}

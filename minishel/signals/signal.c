@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:53:03 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 09:24:01 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:55:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ void	signal_handler(int signal)
 	}
 }
 
-void    ft_hide_keystrockes(struct termios *sig)
+void	ft_hide_keystrockes(struct termios *sig)
 {
-    struct termios attr;
+	struct termios	attr;
 
-    tcgetattr(STDIN_FILENO, sig);
-    tcgetattr(STDIN_FILENO, &attr);
-    attr.c_lflag &= ~ECHOCTL; 
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &attr);
+	tcgetattr(STDIN_FILENO, sig);
+	tcgetattr(STDIN_FILENO, &attr);
+	attr.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attr);
 }
 
-void init_signals(struct termios *sig)
+void	init_signals(struct termios *sig)
 {
-    ft_hide_keystrockes(sig);
-    signal(SIGINT, signal_handler);
-    signal(SIGQUIT, signal_handler);
+	ft_hide_keystrockes(sig);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 }

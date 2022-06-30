@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:41:17 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 15:48:12 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:40:04 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_env_val(char *env, int i)
 {
-	int lenght;
+	int		lenght;
 	char	*val;
 
 	lenght = i;
@@ -28,7 +28,7 @@ char	*get_env_val(char *env, int i)
 		i++;
 	}
 	val[i] = '\0';
-	return(val);
+	return (val);
 }
 
 char	*get_variable_value(char *variable, t_tab *tab)
@@ -43,14 +43,15 @@ char	*get_variable_value(char *variable, t_tab *tab)
 		value = ft_itoa(g_exit_status);
 	else
 	{
-		while(tab->envp[j])
+		while (tab->envp[j])
 		{
 			i = 0;
 			while (tab->envp[j][i] != '=' && tab->envp[j][i])
 				i++;
-			if (ft_strncmp(variable, tab->envp[j], i) == 0 && ((size_t)i == ft_strlen(variable)))
+			if (ft_strncmp(variable, tab->envp[j], i) == 0
+				&& ((size_t)i == ft_strlen(variable)))
 				value = get_env_val(tab->envp[j], i);
-			j++;	
+			j++;
 		}
 	}
 	return (value);

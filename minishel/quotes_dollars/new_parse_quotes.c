@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:36:35 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:51:19 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:41:21 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	manage_double_dollar(t_count *count, char *line, t_tab *tab, char *tmp)
 	if (check_dollar_lenght(count->i, line) > 0)
 	{
 		manage_dollar(count, tmp, line, tab);
-		return(1);
+		return (1);
 	}
 	else if (check_dollar_lenght(count->i, line) == 0)
 	{
@@ -79,7 +79,7 @@ void	no_quotes(t_count *count, char *line, t_tab *tab)
 {
 	char	*tmp;
 	char	*stock;
-	
+
 	count->j = 0;
 	tmp = malloc(sizeof(char) * mem_no_quotes(line, count->i, tab) + 1);
 	stock = stock_quotes(count);
@@ -88,7 +88,8 @@ void	no_quotes(t_count *count, char *line, t_tab *tab)
 	{
 		if (line[count->i] == '$' && check_dollar_lenght(count->i, line) > 0)
 			manage_dollar(count, tmp, line, tab);
-		else if (line[count->i] == '$' && check_dollar_lenght(count->i, line) == 0)
+		else if (line[count->i] == '$'
+			&& check_dollar_lenght(count->i, line) == 0)
 			count->i++;
 		else
 			tmp[count->j++] = line[count->i++];

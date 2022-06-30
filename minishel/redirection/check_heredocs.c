@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:02:16 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:33:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:08:00 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	check_heredoc(char *key_word, t_fd *files)
 	input = ft_input();
 	while (1)
 	{
-		if ((ft_strncmp(input, key_word, ft_strlen(input)) == 0) 
+		if ((ft_strncmp(input, key_word, ft_strlen(input)) == 0)
 			&& (ft_strlen(input) == ft_strlen(key_word)))
-			break;
+			break ;
 		if (freed == 1)
 			freed = ft_freed(files, input);
 		else

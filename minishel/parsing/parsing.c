@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:48:00 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:18:22 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:36:41 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_count_pipes(char *cmd_line, char **result)
 {
 	int	pipes;
 	int	i;
-	
+
 	pipes = 0;
 	i = 0;
 	while (cmd_line[i])
@@ -66,38 +66,43 @@ int	ft_count_red(char **str, char q)
 	return (nb_red);
 }
 
+int	words_count(char **str, char c1, char c2, t_pars *p)
+{
+	if (str[p->j][p->i] == '\'' || str[p->j][p->i] == '\"')
+	{
+		p->i = ft_quotes(str[p->j], p->i, str[p->j][p->i]);
+		if (p->i == 0)
+			return (0);
+	}
+	if (str[p->j][p->i] == c1 || str[p->j][p->i] == c2)
+	{
+		if (str[p->j][p->i] == str[p->j][p->i + 1])
+			p->i++;
+		p->word++;
+	}
+	p->i++;
+	return (1);
+}
+
 int	count_words_red(char **str, char c1, char c2)
 {
-	int	word;
-	int	i;
-	int	j;
+	t_pars	p;
 
-	i = 0;
-	j = 0;
-	word = 0;
-	while (str[j])
+	p.i = 0;
+	p.j = 0;
+	p.word = 0;
+	while (str[p.j])
 	{
-		i = 0;
-		while (str[j][i])
+		p.i = 0;
+		while (str[p.j][p.i])
 		{
-			if (str[j][i] == '\'' || str[j][i] == '\"')
-			{
-				i = ft_quotes(str[j], i, str[j][i]);
-				if (i == 0)
-					return (0);
-			}
-			if (str[j][i] == c1 || str[j][i] == c2)
-			{
-				if (str[j][i] == str[j][i + 1])
-					i++;
-				word++;
-			}
-			i++;
+			if (!words_count(str, c1, c2, &p))
+				return (0);
 		}
-		word++;
-		j++;
+		p.word++;
+		p.j++;
 	}
-	return (word);
+	return (p.word);
 }
 
 int	ft_len_red(char *str, int start)

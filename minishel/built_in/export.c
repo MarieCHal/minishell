@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 14:28:06 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:54:26 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:09:08 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_order(t_tab *tab)
 	while (tab->envp[len])
 		len++;
 	len ++;
-	order = malloc (len* sizeof(order));
+	order = malloc (len * sizeof(order));
 	while (i++ <= 122)
 	{
 		j = 0;

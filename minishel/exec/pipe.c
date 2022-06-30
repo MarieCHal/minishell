@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:32:10 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 11:42:54 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:16:03 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	ft_exec_child(char **cmd, int i, t_fd *files, t_tab *tab)
 	if (i > 0)
 		dup2(files->fd[i - 1][0], STDIN_FILENO);
 	if (i < files->nb_pipe)
-		dup2(files->fd[i][1], STDOUT_FILENO); 
+		dup2(files->fd[i][1], STDOUT_FILENO);
 	close_pipes(files->nb_pipe, files->fd);
 	if (files->red == 1)
 		exec_red(cmd, files, tab);
 	else if (files->red == 0)
 		ft_execve(cmd, tab);
-	return (0);  
+	return (0);
 }
 
 //does all the parsing (spaces, redirections) + stocks the fds of red if present
@@ -52,8 +52,9 @@ char	**parsed_tab(char *tab, t_fd *files)
 
 	ft_init_red(files);
 	parse_space = ft_split(tab, ' ');
-	if ((files->red = ft_search_red(parse_space)) == 0)
-		return(parse_space);
+	files->red = ft_search_red(parse_space);
+	if (files->red == 0)
+		return (parse_space);
 	parse_red = ft_parse_red(parse_space);
 	ft_check_fd_in(parse_red, files);
 	new = post_red(parse_red);
@@ -61,9 +62,9 @@ char	**parsed_tab(char *tab, t_fd *files)
 	return (new);
 }
 
-//takes as arguments the command line split according to 
+//takes as arguments the command line split according to
 //the pipes and the number of pipe that have to be created
-int ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab)
+int	ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab)
 {
 	t_fd	files;
 	char	**cmd_parsed;

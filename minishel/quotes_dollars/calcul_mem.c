@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:32:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 10:59:24 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:37:36 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	mem_no_quotes(char *line, int pos, t_tab *tab)
 {
 	int		size;
-	char 	*to_free;
+	char	*to_free;
 
 	size = 0;
 	while ((line[pos] != '\'') && (line[pos] != '\"') && (line[pos] != '\0'))

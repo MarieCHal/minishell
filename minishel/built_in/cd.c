@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:49:25 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:53:52 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:09:17 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,3 @@ int	ft_cd(char *path, t_tab *tab)
 	free (tab->just_path);
 	return (0);
 }
-

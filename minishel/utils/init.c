@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:36:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 09:09:59 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:58:25 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void	ft_init_red(t_fd *files)
 
 void	ft_init_built_in(t_tab *tab)
 {
+	tab->old_pwd = NULL;
 	tab->dir = NULL;
-	tab->pwd_var = "PWD=";
-	tab->oldpwd_var = "OLDPWD=";
-	tab->home_path = "/Users/mchalard";
+	tab->pwd_var = "PWD=\0";
+	tab->oldpwd_var = "OLDPWD=\0";
+	tab->home_path = "/Users/mchalard\0";
 	tab->envp = NULL;
+	tab->just_path = NULL;
+	tab->another_oldpwd = NULL;
+	tab->built_in = "/built_in\0";
 }

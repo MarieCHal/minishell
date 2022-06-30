@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:41:41 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 11:39:57 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:11:19 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_wait_pid(t_fd *files)
 {
 	int		status;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i <= files->nb_pipe)
@@ -49,9 +49,9 @@ void	free_tab(char **tab_to_free)
 void	free_double(char *stock, char *tmp)
 {
 	if (stock != 0)
-        free(stock);
-    if (tmp != 0)
-        free(tmp);
+		free(stock);
+	if (tmp != 0)
+		free(tmp);
 }
 
 void	close_pipes(int nb_pipe, int (*fd)[2])
@@ -74,5 +74,5 @@ void	close_fd(t_fd *files)
 	if (files->fd_in != -1)
 		close(files->fd_in);
 	if (files->fd_out != -1)
-		close(files->fd_out); 
+		close(files->fd_out);
 }

@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:21:02 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:17:11 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:37:37 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	ft_check_access(char **cmd_tab, char **my_paths)
 	return (error);
 }
 
-int	ft_builin_absolute(char **cmd_tab, char *cmd_pipe)
+int	ft_builin_absolute(char **cmd_tab, t_tab *tab)
 {
-	if (built_in(cmd_tab[0]) != 0)
+	if (built_in(cmd_tab[0], tab) != 0)
 	{
 		free_tab(cmd_tab);
 		return (0);
 	}
-	else if (access(cmd_pipe, X_OK) == 0)
+	else if (access(cmd_tab[0], X_OK) == 0)
 	{
 		free_tab(cmd_tab);
 		return (0);
@@ -73,7 +73,7 @@ void	ft_no_cmd(char **cmd_tab, char **my_paths)
 	
 	error = ft_check_access(cmd_tab, my_paths);
 	if (error == -1 && cmd_tab[0] != NULL)
-			printf("bash: %s: command not found\n", cmd_tab[0]);
+		printf("bash: %s: command not found\n", cmd_tab[0]);
 	free_tab(cmd_tab);
 }
 
@@ -93,7 +93,7 @@ void	ft_unvalid_cmd(char **cmd_pipe, t_tab *tab)
 		cmd_parsed = ft_cmd_to_exec(cmd_pipe[j]);
 		cmd_tab = replace_quotes(cmd_parsed, tab);
 		free_tab(cmd_parsed);
-		if (!ft_builin_absolute(cmd_tab, cmd_pipe[j]))
+		if (!ft_builin_absolute(cmd_tab, tab))
 			j++;
 		else
 		{

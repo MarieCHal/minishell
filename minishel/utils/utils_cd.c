@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 13:32:41 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 13:26:16 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:08:55 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,29 @@ void	ft_back_cd(t_tab *tab, char *path, int j, int i)
 {
 	char	**split_path;
 	char	*back_oldpwd;
+	int		pos;
+	int		len;
 
+	pos = 0;
+	len = ft_strlen(tab->just_path);
+	back_oldpwd = malloc ((len + 1) * sizeof(char));
 	split_path = ft_split(path, '/');
-	back_oldpwd = tab->just_path;
-	while (split_path[i])
+	while (tab->just_path[pos])
+	{
+		back_oldpwd[pos] = tab->just_path[pos];
+		pos++;
+	}
+	back_oldpwd[pos] = '\0';
+	while (split_path[i++])
 	{
 		ft_is_back(tab, j);
 		free (tab->just_path);
 		find_pwd_line(tab);
-		i++;
 	}
 	free (tab->envp[j + 1]);
 	tab->envp[j + 1] = ft_strjoin(tab->oldpwd_var, back_oldpwd);
 	free_tab (split_path);
+	free (back_oldpwd);
 }
 
 void	ft_is_back(t_tab *tab, int j)

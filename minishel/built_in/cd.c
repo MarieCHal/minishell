@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:49:25 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/30 16:09:17 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:41:18 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	ft_is_pwd(t_tab *tab, char *path, int j)
 	len = ft_strlen(tab->envp[j]);
 	free (tab->just_path);
 	tab->just_path = fill_malloc(tab, j, i, len - 3);
-	if (ft_strncmp(path, "..", 2) == 0)
+	if (ft_strncmp(path, "/", 1) == 0)
+		ft_is_absolut(tab, j, path);
+	else if (ft_strncmp(path, "..", 2) == 0)
 		ft_is_back(tab, j);
 	else
 		ft_is_path(tab, j, path);
@@ -92,7 +94,7 @@ int	ft_cd(char *path, t_tab *tab)
 	}
 	else if (ft_strncmp(path, "..", 2) == 0)
 		ft_back_cd(tab, path, j, i);
-	else if (chdir(path))
+	else if (chdir(path) || ft_strncmp(path, "/", 1) == 0)
 		ft_correct_path(tab, path);
 	free (tab->just_path);
 	return (0);

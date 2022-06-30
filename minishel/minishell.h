@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/30 16:07:15 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:20:47 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,6 @@ void	fill_new_envp(t_tab *tab, char **envp_stock, char *var);
 char	*new_path_malloc(char *path, char *new_path);
 void	cd_home(t_tab *tab, int j);
 char	*find_args(t_tab *tab);
+void	ft_is_absolut(t_tab *tab, int j, char *path);
 
 #endif

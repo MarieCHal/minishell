@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 16:31:48 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/30 15:09:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:38:35 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ void	cd_home(t_tab *tab, int j)
 	free (tab->envp[j]);
 	tab->envp[j] = ft_strjoin(tab->pwd_var, tab->home_path);
 	chdir (tab->home_path);
+}
+
+void	ft_is_absolut(t_tab *tab, int j, char *path)
+{
+	free (tab->envp[j]);
+	tab->envp[j] = ft_strjoin(tab->pwd_var, path);
 }

@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:44 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/30 14:03:57 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:15:45 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_tab
 	char	*just_path;
 	char	*home_path;
 	char	*another_oldpwd;
+	char	*args;
+	char	*built_in;
 }			t_tab;
 
 int		main(int argc, char **argv, char **envp);
@@ -128,7 +130,7 @@ int		ft_atoi(char *str);
 //execution------------------------------------------
 void	check_exec(char *command);
 int		check_cmd(char **tab_split, t_tab *tab);
-int		built_in(char *command);
+int		built_in(char *command, t_tab *tab);
 int		check_our_built_in(char **tab1, t_tab *tab);
 int		ft_execve(char **input, t_tab *tab);
 int		ft_pipe(char **cmd, int nb_pipe, int i, t_tab *tab);
@@ -184,5 +186,6 @@ void	ft_init_built_in(t_tab *tab);
 void	fill_new_envp(t_tab *tab, char **envp_stock, char *var);
 char	*new_path_malloc(char *path, char *new_path);
 void	cd_home(t_tab *tab, int j);
+char	*find_args(t_tab *tab);
 
 #endif

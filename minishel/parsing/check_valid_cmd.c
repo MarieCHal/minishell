@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_valid_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:21:02 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:17:11 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:52:03 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	ft_check_access(char **cmd_tab, char **my_paths)
 	return (error);
 }
 
-int	ft_builin_absolute(char **cmd_tab, char *cmd_pipe)
+int	ft_builin_absolute(char **cmd_tab, char *cmd_pipe, t_tab *tab)
 {
-	if (built_in(cmd_tab[0]) != 0)
+	if (built_in(cmd_tab[0], tab) != 0)
 	{
 		free_tab(cmd_tab);
 		return (0);
@@ -93,7 +93,7 @@ void	ft_unvalid_cmd(char **cmd_pipe, t_tab *tab)
 		cmd_parsed = ft_cmd_to_exec(cmd_pipe[j]);
 		cmd_tab = replace_quotes(cmd_parsed, tab);
 		free_tab(cmd_parsed);
-		if (!ft_builin_absolute(cmd_tab, cmd_pipe[j]))
+		if (!ft_builin_absolute(cmd_tab, cmd_pipe[j], tab))
 			j++;
 		else
 		{

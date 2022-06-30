@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:59:44 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/06/29 16:18:20 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:13:33 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 	init_signals(&sig);
 	ft_init_built_in(&tab);
 	envp_init(&tab, envp);
+	tab.args = find_args(&tab);
 	argv = NULL;
 	if (argc == 1)
 	{

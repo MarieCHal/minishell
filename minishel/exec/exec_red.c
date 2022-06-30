@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_red.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:23:05 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 16:40:30 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 14:13:36 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	check_heredoc_tab(t_fd *files)
 			printf("%s\n", files->tab_in[j]);
 			j++;
 		}
-	}   
+	}
 }
 
 void    ft_wait(t_fd *files, t_pid *pid)
 {
     int status;
-    
+
     status = 0;
     close_fd(files);
     waitpid(pid->pid_child1, NULL, 0);

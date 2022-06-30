@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:36:19 by mchalard          #+#    #+#             */
-/*   Updated: 2022/06/29 09:09:59 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:05:39 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void	ft_init_red(t_fd *files)
 
 void	ft_init_built_in(t_tab *tab)
 {
+	tab->old_pwd = NULL;
 	tab->dir = NULL;
 	tab->pwd_var = "PWD=";
 	tab->oldpwd_var = "OLDPWD=";
 	tab->home_path = "/Users/mchalard";
 	tab->envp = NULL;
+	tab->just_path = NULL;
+	tab->another_oldpwd = NULL;
+	tab->built_in = "/built_in\0";
 }
